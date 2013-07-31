@@ -1,0 +1,48 @@
+<div tal:define="list view/get_list">
+
+    <strong>
+        Current path: <span tal:replace="view/path" />
+    </strong>
+
+    <p>&nbsp;</p>
+
+    <table>
+
+        <tr>
+            <th>ID</th>
+            <th>Path</th>
+            <th>Type</th>
+            <th>Count</th>
+            <th>Options</th>
+        </tr>
+        <tr tal:repeat="item list">
+            <td tal:content="item/item/id" />
+            <td>
+                <a tal:attributes="href item/item/url" tal:content="item/item/path" />
+            </td>
+            <td tal:content="item/item/type" />
+            <td tal:content="item/countall" />
+            <td>
+                <form action="" method="POST">
+                    <input
+                        type="hidden"
+                        name="go"
+                        tal:attributes="value item/item/path"/>
+                    <input type="submit" value="Go"/>
+                </form>
+            </td>
+        </tr>
+
+    </table>
+
+    <p>&nbsp;</p>
+
+    <form action="" method="POST">
+        <input type="hidden" name="invalidate_cache">
+        <input type="submit" value="Invalidate Cache"/>
+    </form>
+
+    <strong>
+        Elapsed time is <span tal:replace="view/process_time" /> seconds.
+    </strong>
+</div>

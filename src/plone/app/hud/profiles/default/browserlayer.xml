@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+    name="plone.app.hud"
+    interface="plone.app.hud.interfaces.IPloneAppHudLayer"
+  />
+</layers>
