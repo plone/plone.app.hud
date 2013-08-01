@@ -4,7 +4,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.hud.panel import HUDPanelView
 from plone.memoize.ram import cache
-from plone.memoize.ram import global_cache
 from plone.registry import Record
 from plone.registry import Registry
 from plone.registry import field
@@ -17,10 +16,8 @@ class NCDUPanelView(HUDPanelView):
     clear_cache_name = "plone.app.hud.hud_ncdu.clear_cache"
 
     def render(self):
-        print "### render"
         if "invalidate_cache" in self.request.form:
             self.invalidate_cache()
-            print "### invalidate_cache"
 
         self.portal = api.portal.get()
         self.portal_id = self.portal.absolute_url_path()[1:]
@@ -45,7 +42,6 @@ class NCDUPanelView(HUDPanelView):
 
     @cache(cache_key)
     def _get_all_results(self):
-        print "#### _get_all_results", time()
         results = self.context.portal_catalog.searchResults()
         items = {
             self.portal_id: {
@@ -67,7 +63,6 @@ class NCDUPanelView(HUDPanelView):
             self.add_item(item, items)
 
         self.recount(items[self.portal_id])
-        self.ppp(items)  # XXX
         return items
 
     def add_item(self, item, items):
@@ -77,7 +72,6 @@ class NCDUPanelView(HUDPanelView):
         count_parents = 1
         current_parent = items[self.portal_id]
         for current_part in item_path_list[1:]:
-            print "   ", current_part, "in", current_parent["children"].keys()
             if current_part in current_parent["children"]:
                 current_parent = current_parent["children"][current_part]
                 count_parents += 1
@@ -141,7 +135,3 @@ class NCDUPanelView(HUDPanelView):
         end_time = time()
         self.process_time = end_time - start_time
         return result
-
-    def ppp(self, obj):
-        from pprint import pprint
-        pprint(obj, depth=5)
