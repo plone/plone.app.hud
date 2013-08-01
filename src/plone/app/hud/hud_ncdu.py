@@ -57,44 +57,52 @@ class NCDUPanelView(HUDPanelView):
                     "rid": None,
                     "type": self.portal.__class__.__name__,
                     "is_folder": True,
-                    "count": len(self.portal.listFolderContents()),
+                    # "count": len(self.portal.listFolderContents()),
                 },
                 "countall": 0
             }
         }
         for brain in results:
             item = self.get_item(brain)
-            item_id = item["id"]
-            tmp_root = items[self.portal_id]
-            if item["path"].startswith(self.portal_path):
-                item_path = item["path"][len(self.portal_path):]
-            else:
-                item_path = item["path"]
-            for str_id in item_path.split("/")[1:]:
-                if str_id in tmp_root["children"]:
-                    tmp_root = tmp_root["children"][str_id]
-                else:
-                    tmp_root["children"][str_id] = {
-                        "children": {},
-                        "item": None,
-                        "countall": 0
-                    }
+            self.add_item(item, items)
 
-            tmp_root["children"][item_id] = {
+        self.recount(items[self.portal_id])
+        self.ppp(items)  # XXX
+        return items
+
+    def add_item(self, item, items):
+        item_path_list = item["path"][1:].split("/")
+
+        # find last known parent
+        count_parents = 1
+        current_parent = items[self.portal_id]
+        for current_part in item_path_list[1:]:
+            print "   ", current_part, "in", current_parent["children"].keys()
+            if current_part in current_parent["children"]:
+                current_parent = current_parent["children"][current_part]
+                count_parents += 1
+            else:
+                break
+
+        # fill path
+        tail_list = item_path_list[count_parents:]
+
+        for tail_part in tail_list:
+            current_parent["children"][tail_part] = {
                 "children": {},
-                "item": item,
+                "item": None,
                 "countall": 0
             }
-        self.recount(items[self.portal_id])
-        self.ppp(items)
-        return items
+            current_parent = current_parent["children"][tail_part]
+
+        # set actual item
+        current_parent["item"] = item
 
     def recount(self, root):
         children = root["children"]
         if children:
             for child in children:
-                root["countall"] += 1
-                root["countall"] += self.recount(children[child])
+                root["countall"] += self.recount(children[child]) + 1
             return root["countall"]
         else:
             return 0
@@ -109,10 +117,7 @@ class NCDUPanelView(HUDPanelView):
             "rid": brain.getRID(),
             "type": obj.__class__.__name__,
             "is_folder": is_folder,
-            "count": -1,
         }
-        if is_folder:
-            item["count"] = len(obj.listFolderContents())
         return item
 
     def filter_results_by_path(self):
@@ -139,4 +144,4 @@ class NCDUPanelView(HUDPanelView):
 
     def ppp(self, obj):
         from pprint import pprint
-        pprint(obj, depth=4)
+        pprint(obj, depth=5)

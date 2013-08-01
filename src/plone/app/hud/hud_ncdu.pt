@@ -15,19 +15,19 @@
             <th>Count</th>
             <th>Options</th>
         </tr>
-        <tr tal:repeat="item list">
-            <td tal:content="item/item/id" />
+        <tr tal:repeat="parent list">
+            <td tal:content="parent/item/id" />
             <td>
-                <a tal:attributes="href item/item/url" tal:content="item/item/path" />
+                <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
             </td>
-            <td tal:content="item/item/type" />
-            <td tal:content="item/countall" />
+            <td tal:content="parent/item/type" />
+            <td tal:content="parent/countall" />
             <td>
                 <form action="" method="POST">
                     <input
                         type="hidden"
                         name="go"
-                        tal:attributes="value item/item/path"/>
+                        tal:attributes="value parent/item/path"/>
                     <input type="submit" value="Go"/>
                 </form>
             </td>
