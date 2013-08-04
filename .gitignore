@@ -7,3 +7,4 @@ include
 lib
 parts
 var
+src/plone.hud/
