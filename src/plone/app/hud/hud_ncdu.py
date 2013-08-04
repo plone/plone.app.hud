@@ -3,21 +3,21 @@ from Products.ATContentTypes.content.folder import ATFolder
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.hud.panel import HUDPanelView
-from plone.memoize.ram import cache
-from plone.registry import Record
-from plone.registry import Registry
-from plone.registry import field
+from plone.memoize.ram import RAMCacheAdapter
+from plone.memoize.volatile import cache
 from time import time
+from zope.ramcache import ram
+
+ncdu_cache = ram.RAMCache()
+ncdu_cache.update(maxAge=86400, maxEntries=10)
 
 
 class NCDUPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_ncdu.pt')
-    registry = Registry()
-    clear_cache_name = "plone.app.hud.hud_ncdu.clear_cache"
 
     def render(self):
         if "invalidate_cache" in self.request.form:
-            self.invalidate_cache()
+            ncdu_cache.invalidateAll()
 
         self.portal = api.portal.get()
         self.portal_id = self.portal.absolute_url_path()[1:]
@@ -29,18 +29,10 @@ class NCDUPanelView(HUDPanelView):
             self.path = self.portal_path
         return self.panel_template()
 
-    def cache_key(method, self):
-        if not self.clear_cache_name in self.registry:
-            clear_cache_field = field.Text(title=u"Clear Cache")
-            clear_cache_record = Record(clear_cache_field)
-            clear_cache_record.value = unicode(time())
-            self.registry.records[self.clear_cache_name] = clear_cache_record
-        return self.registry[self.clear_cache_name]
-
-    def invalidate_cache(self):
-        self.registry[self.clear_cache_name] = unicode(time())
-
-    @cache(cache_key)
+    @cache(
+        lambda method, self: "cache_key",
+        get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(ncdu_cache)
+    )
     def _get_all_results(self):
         results = self.context.portal_catalog.searchResults()
         items = {
