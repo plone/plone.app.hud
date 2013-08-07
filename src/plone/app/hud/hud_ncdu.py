@@ -126,4 +126,14 @@ class NCDUPanelView(HUDPanelView):
         result = self.filter_results_by_path()
         end_time = time()
         self.process_time = end_time - start_time
+
+        path_list = self.path.split("/")[1:]
+        self.clickable_path_list = []
+        current_path = []
+        for current_id in path_list:
+            current_path += [current_id]
+            self.clickable_path_list += [{
+                "id": current_id,
+                "path": "/" + "/".join(current_path)
+            }]
         return result
