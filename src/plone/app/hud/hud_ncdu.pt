@@ -1,12 +1,25 @@
 <div tal:define="list view/get_list">
 
-    <strong>
-        Current path: <span tal:replace="view/path" />
-    </strong>
+    <table>
+        <tr>
+            <td>
+                Path:&nbsp;
+            </td>
+            <td tal:repeat="button view/clickable_path_list">
+                <form action="" method="POST">
+                    <input
+                        type="hidden"
+                        name="go"
+                        tal:attributes="value button/path"/>
+                    <input type="submit" tal:attributes="value button/id"/>
+                </form>
+            </td>
+        </tr>
+    </table>
 
     <p>&nbsp;</p>
 
-    <table>
+    <table class="listing">
 
         <tr>
             <th>ID</th>
@@ -35,14 +48,14 @@
 
     </table>
 
+    <p>
+        Elapsed time is <span tal:replace="view/process_time" /> seconds.
+    </p>
+
     <p>&nbsp;</p>
 
     <form action="" method="POST">
         <input type="hidden" name="invalidate_cache">
         <input type="submit" value="Invalidate Cache"/>
     </form>
-
-    <strong>
-        Elapsed time is <span tal:replace="view/process_time" /> seconds.
-    </strong>
 </div>
