@@ -125,7 +125,7 @@ class NCDUPanelView(HUDPanelView):
         start_time = time()
         result = self.filter_results_by_path()
         end_time = time()
-        self.process_time = end_time - start_time
+        self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
 
         path_list = self.path.split("/")[1:]
         self.clickable_path_list = []
