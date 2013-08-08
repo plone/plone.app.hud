@@ -22,6 +22,12 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <!-- Publish static files -->
+    <browser:resourceDirectory
+        name="plone.app.hud"
+        directory="static"
+        />
+
     <permission
         id="plone.app.hud.ncdupanel"
         title="HUD: NCDU Panel Permission"
