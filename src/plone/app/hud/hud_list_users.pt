@@ -1,0 +1,28 @@
+<h2 tal:content="view/title" />
+
+<form action="" method="POST">
+    <input type="submit" value="Back"/>
+</form>
+
+<p>&nbsp;</p>
+
+<table class="listing">
+    <tr>
+        <th>Username</th>
+        <th>Full name</th>
+        <th>Email</th>
+    </tr>
+    <tr tal:repeat="user view/users">
+        <td>
+            <a tal:content="user/username" tal:attributes="href user/link" />
+        </td>
+        <td tal:content="user/fullname"/>
+        <td tal:content="user/email"/>
+    </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<form action="" method="POST">
+    <input type="submit" value="Back"/>
+</form>

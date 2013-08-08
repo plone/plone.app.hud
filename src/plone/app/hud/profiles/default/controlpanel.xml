@@ -17,4 +17,17 @@
             <permission>HUD: NCDU Panel Permission</permission>
     </configlet>
 
+    <configlet
+        title="Users Panel"
+        action_id="users.panel"
+        appId="hud_users"
+        category="HUD"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@hud_users"
+        icon_expr=""
+        visible="True"
+        i18n:attributes="title">
+            <permission>HUD: Users Panel Permission</permission>
+    </configlet>
+
 </object>

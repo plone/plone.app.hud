@@ -40,4 +40,15 @@
         permission="plone.app.hud.ncdupanel"
         />
 
+    <permission
+        id="plone.app.hud.userspanel"
+        title="HUD: Users Panel Permission"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="hud_users"
+        class="plone.app.hud.hud_users.UsersPanelView"
+        permission="plone.app.hud.userspanel"
+        />
 </configure>
