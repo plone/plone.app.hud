@@ -153,7 +153,7 @@ class NCDUPanelView(HUDPanelView):
         http://developer.plone.org/misc/datetime.html
         """
 
-        if date == None:
+        if date is None:
             return ""
 
         date = DateTime(date).asdatetime()  # zope DateTime -> python datetime
