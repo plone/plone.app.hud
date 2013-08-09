@@ -22,19 +22,16 @@
     <table class="listing">
 
         <tr>
+            <th>Options</th>
             <th>ID</th>
             <th>Path</th>
             <th>Type</th>
-            <th>Count</th>
-            <th>Options</th>
+            <th>Subitems</th>
+            <th>Size</th>
+            <th>Modified</th>
+            <th>State</th>
         </tr>
         <tr tal:repeat="parent list">
-            <td tal:content="parent/item/id" />
-            <td>
-                <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
-            </td>
-            <td tal:content="parent/item/type" />
-            <td tal:content="parent/countall" />
             <td>
                 <form action="" method="POST">
                     <input
@@ -44,6 +41,15 @@
                     <input type="submit" value="Go"/>
                 </form>
             </td>
+            <td tal:content="parent/item/id" />
+            <td>
+                <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
+            </td>
+            <td tal:content="parent/item/type" />
+            <td tal:content="parent/countall" />
+            <td tal:content="parent/item/size" />
+            <td tal:content="python: view.format_datetime_friendly_ago(parent['item']['modified'])" />
+            <td tal:content="parent/item/state" />
         </tr>
 
     </table>

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from DateTime import DateTime
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
@@ -7,6 +8,10 @@ from plone.memoize.ram import RAMCacheAdapter
 from plone.memoize.volatile import cache
 from time import time
 from zope.ramcache import ram
+
+import datetime
+import math
+import pytz
 
 ncdu_cache = ram.RAMCache()
 ncdu_cache.update(maxAge=86400, maxEntries=10)
@@ -103,6 +108,9 @@ class NCDUPanelView(HUDPanelView):
             "rid": brain.getRID(),
             "type": obj.__class__.__name__,
             "is_folder": is_folder,
+            "size": obj.get_size(),
+            "state": str(api.content.get_state(obj=obj)),
+            "modified": obj.ModificationDate()
         }
         return item
 
@@ -137,3 +145,45 @@ class NCDUPanelView(HUDPanelView):
                 "path": "/" + "/".join(current_path)
             }]
         return result
+
+    def format_datetime_friendly_ago(self, date):
+        """ Format date & time using site specific settings.
+
+        Source:
+        http://developer.plone.org/misc/datetime.html
+        """
+
+        if date == None:
+            return ""
+
+        date = DateTime(date).asdatetime()  # zope DateTime -> python datetime
+
+        # How long ago the timestamp is
+        # See timedelta doc http://docs.python.org/lib/datetime-timedelta.html
+        #since = datetime.datetime.utcnow() - date
+
+        now = datetime.datetime.utcnow()
+        now = now.replace(tzinfo=pytz.utc)
+
+        since = now - date
+
+        seconds = since.seconds + since.microseconds / 1E6 + since.days * 86400
+
+        days = math.floor(seconds / (3600 * 24))
+
+        if days <= 0 and seconds <= 0:
+            # Timezone confusion, is in future
+            return "moment ago"
+
+        if days >= 1:
+            return self.portal.toLocalizedTime(date)
+        else:
+            hours = math.floor(seconds / 3600.0)
+            minutes = math.floor((seconds % 3600) / 60)
+            if hours > 0:
+                return "%d hours %d minutes ago" % (hours, minutes)
+            else:
+                if minutes > 0:
+                    return "%d minutes ago" % minutes
+                else:
+                    return "few seconds ago"
