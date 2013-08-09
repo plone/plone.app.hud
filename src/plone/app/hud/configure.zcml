@@ -29,6 +29,18 @@
         />
 
     <permission
+        id="plone.app.hud.bestpracticespanel"
+        title="HUD: Best Practices Panel Permission"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="hud_best_practices"
+        class="plone.app.hud.hud_best_practices.BestPracticesPanelView"
+        permission="plone.app.hud.bestpracticespanel"
+        />
+
+    <permission
         id="plone.app.hud.ncdupanel"
         title="HUD: NCDU Panel Permission"
         />

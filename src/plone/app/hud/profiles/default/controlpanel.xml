@@ -5,7 +5,20 @@
     i18n:domain="plone.app.hud">
 
     <configlet
-        title="NCDU Panel"
+        title="Best Practices"
+        action_id="best.practices.panel"
+        appId="hud_bestpractices"
+        category="HUD"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@hud_best_practices"
+        icon_expr=""
+        visible="True"
+        i18n:attributes="title">
+            <permission>HUD: Best Practices Panel Permission</permission>
+    </configlet>
+
+    <configlet
+        title="NCDU"
         action_id="ncdu.panel"
         appId="hud_ncdu"
         category="HUD"
@@ -18,7 +31,7 @@
     </configlet>
 
     <configlet
-        title="Users Panel"
+        title="Users"
         action_id="users.panel"
         appId="hud_users"
         category="HUD"

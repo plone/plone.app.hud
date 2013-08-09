@@ -1,0 +1,30 @@
+
+<div tal:define="zope_writable_files view/zope_writable_files">
+
+    <h2>
+        Zope source files write permission
+    </h2>
+
+    <div tal:condition="not: zope_writable_files">
+        <span>No source files are writable by Plone, good job!</span>
+        <p>&nbsp;</p>
+    </div>
+
+    <div tal:condition="zope_writable_files">
+        <span>All these files are writable by Plone, fix it!</span>
+        <p>&nbsp;</p>
+
+        <div tal:repeat="entry zope_writable_files">
+            <div tal:condition="entry/whole_parent">
+                All in path: <strong tal:content="entry/absparentpath"/>
+            </div>
+            <div tal:condition="not: entry/whole_parent">
+                In path: <strong tal:content="entry/absparentpath"/>
+                <ul tal:repeat="item entry/contents">
+                    &nbsp;<li tal:content="item" />
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
