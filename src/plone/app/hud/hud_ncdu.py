@@ -3,6 +3,7 @@ from DateTime import DateTime
 from Products.ATContentTypes.content.folder import ATFolder
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+from plone.app.hud import _
 from plone.hud.panel import HUDPanelView
 from plone.memoize.ram import RAMCacheAdapter
 from plone.memoize.volatile import cache
@@ -173,7 +174,7 @@ class NCDUPanelView(HUDPanelView):
 
         if days <= 0 and seconds <= 0:
             # Timezone confusion, is in future
-            return "moment ago"
+            return _(u"moment ago")
 
         if days >= 1:
             return self.portal.toLocalizedTime(date)
@@ -181,9 +182,9 @@ class NCDUPanelView(HUDPanelView):
             hours = math.floor(seconds / 3600.0)
             minutes = math.floor((seconds % 3600) / 60)
             if hours > 0:
-                return "%d hours %d minutes ago" % (hours, minutes)
+                return _(u"{0} hours {1} minutes ago").format(hours, minutes)
             else:
                 if minutes > 0:
-                    return "%d minutes ago" % minutes
+                    return _(u"{0} minutes ago").format(minutes)
                 else:
-                    return "few seconds ago"
+                    return _(u"few seconds ago")

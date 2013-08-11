@@ -1,9 +1,11 @@
-<div tal:define="list view/get_list">
+<div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="plone.app.hud"
+     tal:define="list view/get_list">
 
     <table>
         <tr>
             <td>
-                Path:&nbsp;
+                <span i18n:translate="">Path</span>:&nbsp;
             </td>
             <td tal:repeat="button view/clickable_path_list">
                 <form action="" method="POST">
@@ -22,14 +24,14 @@
     <table class="listing">
 
         <tr>
-            <th>Options</th>
-            <th>ID</th>
-            <th>Path</th>
-            <th>Type</th>
-            <th>Subitems</th>
-            <th>Size</th>
-            <th>Modified</th>
-            <th>State</th>
+            <th i18n:translate="">Options</th>
+            <th i18n:translate="">ID</th>
+            <th i18n:translate="">Path</th>
+            <th i18n:translate="">Type</th>
+            <th i18n:translate="">Subitems</th>
+            <th i18n:translate="">Size</th>
+            <th i18n:translate="">Modified</th>
+            <th i18n:translate="">State</th>
         </tr>
         <tr tal:repeat="parent list">
             <td>
@@ -38,7 +40,7 @@
                         type="hidden"
                         name="go"
                         tal:attributes="value parent/item/path"/>
-                    <input type="submit" value="Go"/>
+                    <input type="submit" value="Go" i18n:attributes="value"/>
                 </form>
             </td>
             <td tal:content="parent/item/id" />
@@ -54,7 +56,7 @@
 
     </table>
 
-    <p>
+    <p i18n:translate="">
         Elapsed time is <span tal:replace="view/process_time" /> seconds.
     </p>
 
@@ -62,6 +64,6 @@
 
     <form action="" method="POST">
         <input type="hidden" name="invalidate_cache">
-        <input type="submit" value="Invalidate Cache"/>
+        <input type="submit" value="Invalidate Cache" i18n:attributes="value"/>
     </form>
 </div>

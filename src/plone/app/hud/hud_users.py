@@ -2,6 +2,7 @@
 from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+from plone.app.hud import _
 from plone.hud.panel import HUDPanelView
 
 import urllib
@@ -17,24 +18,24 @@ class UsersPanelView(HUDPanelView):
 
         if "filter_by_days" in self.request.form:
             self.value = self.request.form["filter_by_days"]
-            self.title = "Filtered by {0} days".format(self.value)
+            self.title = _(u"Filtered by {0} days").format(self.value)
             self.users = self.get_filtered_users(by_days=self.value)
             return ViewPageTemplateFile('hud_list_users.pt')(self)
 
         elif "filter_by_group" in self.request.form:
             value = self.request.form["filter_by_group"]
             self.value = urllib.unquote(value)
-            self.title = "Filtered by {0} group".format(self.value)
+            self.title = _(u"Filtered by {0} group").format(self.value)
             self.users = self.get_filtered_users(by_group=self.value)
             return ViewPageTemplateFile('hud_list_users.pt')(self)
 
         self.count_users = len(self.all_users)
         days_list = [
-            ("Last day", 1),
-            ("Last week", 7),
-            ("Last month", 31),
-            ("Last year", 366),
-            ("Never", -1)
+            (_(u"Last day"), 1),
+            (_(u"Last week"), 7),
+            (_(u"Last month"), 31),
+            (_(u"Last year"), 366),
+            (_(u"Never"), -1)
         ]
         self.process_all(days_list=days_list)
         return self.panel_template()
