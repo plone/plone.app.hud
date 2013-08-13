@@ -1,0 +1,166 @@
+# #############################################################################
+#
+# Copyright (c) 2003-2004 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: Sun Aug 11 03:52:11 2013\n"
+"PO-Revision-Date: 2013-08-12 22:41+0200\n"
+"Last-Translator: Natasa <nata.cotman@gmail.com>\n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: plone.app.hud:/hud_best_practices.pt:11
+msgid "No source files are writable by Plone, good job!"
+msgstr "Plone no tiene el permiso de escritura para los archivos fuente, ¡enhorabuena!"
+
+#: plone.app.hud:/hud_best_practices.pt:16
+msgid "All these files are writable by Plone, fix it!"
+msgstr "Los siguientes archivos fuente tienen el permiso de escritura, ¡corrigelos!"
+
+#: plone.app.hud:/hud_best_practices.pt:21
+msgid "All in path:"
+msgstr "Todo en:"
+
+#: plone.app.hud:/hud_best_practices.pt:25
+msgid "In path:"
+msgstr "Dentro de:"
+
+#: plone.app.hud:/hud_best_practices.pt:6
+msgid "Zope source files write permission"
+msgstr "El permiso de escritura de los archivos fuente Zope"
+
+#: plone.app.hud:/hud_list_users.pt:15
+msgid "Username"
+msgstr "Nombre del usuario"
+
+#: plone.app.hud:/hud_list_users.pt:16
+msgid "Full name"
+msgstr "Nombre completo"
+
+#: plone.app.hud:/hud_list_users.pt:17
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: plone.app.hud:/hud_list_users.pt:8 plone.app.hud:/hud_list_users.pt:31
+msgid "Back"
+msgstr "Volver"
+
+#: plone.app.hud:/hud_ncdu.pt:27
+msgid "Options"
+msgstr "Opciones"
+
+#: plone.app.hud:/hud_ncdu.pt:28
+msgid "ID"
+msgstr "ID"
+
+#: plone.app.hud:/hud_ncdu.pt:30
+msgid "Type"
+msgstr "Tipo"
+
+#: plone.app.hud:/hud_ncdu.pt:31
+msgid "Subitems"
+msgstr "Sub elementos"
+
+#: plone.app.hud:/hud_ncdu.pt:32
+msgid "Size"
+msgstr "Tamaño"
+
+#: plone.app.hud:/hud_ncdu.pt:33
+msgid "Modified"
+msgstr "Modificado"
+
+#: plone.app.hud:/hud_ncdu.pt:34
+msgid "State"
+msgstr "Estado"
+
+#: plone.app.hud:/hud_ncdu.pt:43
+msgid "Go"
+msgstr "Ir a"
+
+#: plone.app.hud:/hud_ncdu.pt:60
+msgid "Elapsed time is ${DYNAMIC_CONTENT} seconds."
+msgstr "Ha pasado ${DYNAMIC_CONTENT} segundos"
+
+#: plone.app.hud:/hud_ncdu.pt:67
+msgid "Invalidate Cache"
+msgstr "Anula el caché"
+
+#: plone.app.hud:/hud_ncdu.pt:8 plone.app.hud:/hud_ncdu.pt:29
+msgid "Path"
+msgstr "Localización"
+
+#: plone.app.hud:/hud_ncdu.py:177
+msgid "moment ago"
+msgstr "hace un momento atrás"
+
+#: plone.app.hud:/hud_ncdu.py:185
+msgid "{0} hours {1} minutes ago"
+msgstr "{0} horas {1} minutos atrás"
+
+#: plone.app.hud:/hud_ncdu.py:188
+msgid "{0} minutes ago"
+msgstr "{0} minutos atrás"
+
+#: plone.app.hud:/hud_ncdu.py:190
+msgid "few seconds ago"
+msgstr "unos segundos atrás"
+
+#: plone.app.hud:/hud_users.pt:17
+msgid "Active: ${DYNAMIC_CONTENT}"
+msgstr "Activo: ${DYNAMIC_CONTENT}"
+
+#: plone.app.hud:/hud_users.pt:28 plone.app.hud:/hud_users.pt:48
+msgid "See"
+msgstr "Ver"
+
+#: plone.app.hud:/hud_users.pt:37
+msgid "Users in ${DYNAMIC_CONTENT}"
+msgstr "Usuarios en ${DYNAMIC_CONTENT}"
+
+#: plone.app.hud:/hud_users.pt:7
+msgid "Count users"
+msgstr "Número de usuarios"
+
+#: plone.app.hud:/hud_users.py:21
+msgid "Filtered by {0} days"
+msgstr "Filtrado por {0} días"
+
+#: plone.app.hud:/hud_users.py:28
+msgid "Filtered by {0} group"
+msgstr "Filtrado por grupo {0}"
+
+#: plone.app.hud:/hud_users.py:34
+msgid "Last day"
+msgstr "El último día"
+
+#: plone.app.hud:/hud_users.py:35
+msgid "Last week"
+msgstr "La última semana"
+
+#: plone.app.hud:/hud_users.py:36
+msgid "Last month"
+msgstr "El último mes"
+
+#: plone.app.hud:/hud_users.py:37
+msgid "Last year"
+msgstr "El último año"
+
+#: plone.app.hud:/hud_users.py:38
+msgid "Never"
+msgstr "Nunca"
