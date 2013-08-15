@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
-from Products.ATContentTypes.content.folder import ATFolder
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
@@ -52,8 +51,6 @@ class NCDUPanelView(HUDPanelView):
                     "id": self.portal_id,
                     "rid": None,
                     "type": self.portal.__class__.__name__,
-                    "is_folder": True,
-                    # "count": len(self.portal.listFolderContents()),
                 },
                 "countall": 0
             }
@@ -102,18 +99,15 @@ class NCDUPanelView(HUDPanelView):
             return 0
 
     def get_item(self, brain):
-        obj = brain.getObject()
-        is_folder = isinstance(obj, ATFolder)
         item = {
             "url": brain.getURL(),
             "path": brain.getPath(),
             "id": brain.getId,
             "rid": brain.getRID(),
-            "type": obj.__class__.__name__,
-            "is_folder": is_folder,
-            "size": obj.get_size(),
-            "state": str(api.content.get_state(obj=obj)),
-            "modified": obj.ModificationDate()
+            "type": brain.Type,
+            "size": brain.getObjSize,
+            "state": str(brain.review_state),
+            "modified": brain.ModificationDate
         }
         return item
 
