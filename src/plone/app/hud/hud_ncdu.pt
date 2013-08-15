@@ -56,6 +56,40 @@
 
     </table>
 
+    <p>&nbsp;</p>
+
+    <div class="sidebyside" tal:condition="view/page_numbers/first">
+        <form action="" method="POST">
+            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/first">
+            <input type="submit" value="First"/>
+        </form>
+    </div>
+    <div class="sidebyside" tal:condition="view/page_numbers/previous">
+        <form action="" method="POST">
+            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/previous">
+            <input type="submit" value="Previous"/>
+        </form>
+    </div>
+    <div class="sidebyside">
+        <form action="" method="POST">
+            <input type="text" name="page_number" tal:attributes="value view/page_numbers/this">
+        </form>
+    </div>
+    <div class="sidebyside" tal:condition="view/page_numbers/next">
+        <form action="" method="POST">
+            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/next">
+            <input type="submit" value="Next"/>
+        </form>
+    </div>
+    <div class="sidebyside" tal:condition="view/page_numbers/last">
+        <form action="" method="POST">
+            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/last">
+            <input type="submit" value="Last"/>
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+
     <p i18n:translate="">
         Elapsed time is <span tal:replace="view/process_time" /> seconds.
     </p>

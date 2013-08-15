@@ -14,6 +14,8 @@ import logging
 import math
 import pytz
 
+ITEMS_PER_PAGE = 50
+
 ncdu_cache = ram.RAMCache()
 ncdu_cache.update(maxAge=86400, maxEntries=10)
 logger = logging.getLogger("plone.app.hud.hud_ncdu")
@@ -25,6 +27,11 @@ class NCDUPanelView(HUDPanelView):
     def render(self):
         if "invalidate_cache" in self.request.form:
             ncdu_cache.invalidateAll()
+
+        try:
+            self.page_number = int(self.request.form["page_number"])
+        except:
+            self.page_number = 1
 
         self.portal = api.portal.get()
         self.portal_id = self.portal.absolute_url_path()[1:]
@@ -124,6 +131,7 @@ class NCDUPanelView(HUDPanelView):
             countall = root_item["children"][str_id]["countall"]
             # if item is not None:
             items += [{"countall": countall, "item": item}]
+        items = sorted(items, key=lambda child: child["item"]["id"])
         return items
 
     def get_list(self):
@@ -147,7 +155,37 @@ class NCDUPanelView(HUDPanelView):
                 "id": current_id,
                 "path": "/" + "/".join(current_path)
             }]
-        return result
+
+        self.page_numbers = {
+            "first": None,
+            "previous": None,
+            "this": None,
+            "next": None,
+            "last": None
+        }
+        start_item = ITEMS_PER_PAGE * (self.page_number - 1)
+        if start_item <= 0:
+            start_item = 0
+            self.page_numbers["first"] = None
+            self.page_numbers["previous"] = None
+            self.page_numbers["this"] = "1"
+        else:
+            self.page_numbers["first"] = "1"
+            self.page_numbers["previous"] = str(self.page_number - 1)
+            self.page_numbers["this"] = str(self.page_number)
+        end_item = start_item + ITEMS_PER_PAGE
+        last_item = len(result) - 1
+        last_page = ((last_item + 1) / ITEMS_PER_PAGE) + 1
+        if end_item >= last_item:
+            end_item = last_item
+            self.page_numbers["this"] = str(last_page)
+            self.page_numbers["next"] = None
+            self.page_numbers["last"] = None
+        else:
+            self.page_numbers["next"] = str(self.page_number + 1)
+            self.page_numbers["last"] = str(last_page)
+
+        return result[start_item:end_item]
 
     def format_datetime_friendly_ago(self, date):
         """ Format date & time using site specific settings.
