@@ -11,11 +11,13 @@ from time import time
 from zope.ramcache import ram
 
 import datetime
+import logging
 import math
 import pytz
 
 ncdu_cache = ram.RAMCache()
 ncdu_cache.update(maxAge=86400, maxEntries=10)
+logger = logging.getLogger("plone.app.hud.hud_ncdu")
 
 
 class NCDUPanelView(HUDPanelView):
@@ -132,9 +134,15 @@ class NCDUPanelView(HUDPanelView):
 
     def get_list(self):
         start_time = time()
+        logger.info("Start database scan.".format(start_time))
         result = self.filter_results_by_path()
         end_time = time()
         self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
+        logger.info(
+            "End of database scan. Elapsed time is {0} seconds.".format(
+                self.process_time
+            )
+        )
 
         path_list = self.path.split("/")[1:]
         self.clickable_path_list = []
