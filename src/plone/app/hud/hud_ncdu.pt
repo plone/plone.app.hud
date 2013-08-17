@@ -1,6 +1,7 @@
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone.app.hud"
-     tal:define="list view/get_list">
+     tal:define="list view/get_list;
+                 root view/current_root;">
 
     <table>
         <tr>
@@ -22,7 +23,7 @@
     <p>&nbsp;</p>
 
     <table class="listing itemfont">
-        <tr tal:define="root view/current_root">
+        <tr>
             <td>
                 <form action="" method="POST">
                     <input
@@ -78,34 +79,41 @@
 
     <p>&nbsp;</p>
 
-    <div class="sidebyside" tal:condition="view/page_numbers/first">
-        <form action="" method="POST">
-            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/first">
-            <input type="submit" value="First"/>
-        </form>
-    </div>
-    <div class="sidebyside" tal:condition="view/page_numbers/previous">
-        <form action="" method="POST">
-            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/previous">
-            <input type="submit" value="Previous"/>
-        </form>
-    </div>
-    <div class="sidebyside">
-        <form action="" method="POST">
-            <input type="text" name="page_number" tal:attributes="value view/page_numbers/this">
-        </form>
-    </div>
-    <div class="sidebyside" tal:condition="view/page_numbers/next">
-        <form action="" method="POST">
-            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/next">
-            <input type="submit" value="Next"/>
-        </form>
-    </div>
-    <div class="sidebyside" tal:condition="view/page_numbers/last">
-        <form action="" method="POST">
-            <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/last">
-            <input type="submit" value="Last"/>
-        </form>
+    <div tal:condition="python: view.page_numbers['first'] != view.page_numbers['last']">
+        <div class="sidebyside" tal:condition="view/page_numbers/first">
+            <form action="" method="POST">
+                <input type="hidden" name="go" tal:attributes="value root/item/path"/>
+                <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/first">
+                <input type="submit" tal:attributes="value python: '<< ' + view.page_numbers['first']"/>
+            </form>
+        </div>
+        <div class="sidebyside" tal:condition="view/page_numbers/previous">
+            <form action="" method="POST">
+                <input type="hidden" name="go" tal:attributes="value root/item/path"/>
+                <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/previous">
+                <input type="submit" tal:attributes="value python: '< ' + view.page_numbers['previous']"/>
+            </form>
+        </div>
+        <div class="sidebyside">
+            <form action="" method="POST">
+                <input type="hidden" name="go" tal:attributes="value root/item/path"/>
+                <input type="text" name="page_number" tal:attributes="value view/page_numbers/this">
+            </form>
+        </div>
+        <div class="sidebyside" tal:condition="view/page_numbers/next">
+            <form action="" method="POST">
+                <input type="hidden" name="go" tal:attributes="value root/item/path"/>
+                <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/next">
+                <input type="submit" tal:attributes="value python: view.page_numbers['next'] + ' >'"/>
+            </form>
+        </div>
+        <div class="sidebyside" tal:condition="view/page_numbers/last">
+            <form action="" method="POST">
+                <input type="hidden" name="go" tal:attributes="value root/item/path"/>
+                <input type="hidden" name="page_number" tal:attributes="value view/page_numbers/last">
+                <input type="submit" tal:attributes="value python: view.page_numbers['last'] + ' >>'"/>
+            </form>
+        </div>
     </div>
 
     <p>&nbsp;</p>
