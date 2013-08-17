@@ -122,7 +122,7 @@ class NCDUPanelView(HUDPanelView):
             "rid": brain.getRID(),
             "type": brain.Type,
             "size": self.get_kbytes(brain.getObjSize),
-            "state": self.workflows[brain.review_state],
+            "state": self.workflows[str(brain.review_state)],
             "modified": brain.ModificationDate
         }
         return item
@@ -261,7 +261,9 @@ class NCDUPanelView(HUDPanelView):
     def parse_workflow_titles(self):
         workflow_tool = api.portal.get_tool('portal_workflow')
         wf_list = workflow_tool.listWFStatesByTitle()
-        wf_dict = {}
+        wf_dict = {
+            "": ""
+        }
         for wf_title, wf_id in wf_list:
             wf_dict[wf_id] = wf_title
         self.workflows = wf_dict
