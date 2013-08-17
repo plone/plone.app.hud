@@ -52,6 +52,10 @@ class UsersPanelView(HUDPanelView):
                 "value": days,
                 "user_count": 0
             }]
+        active_list = sorted(
+            active_list,
+            key=lambda x: x["value"],
+        )
 
         all_groups = api.group.get_groups()
         for group in all_groups:
@@ -63,9 +67,11 @@ class UsersPanelView(HUDPanelView):
             login_date = DateTime(user.getProperty("login_time"))
             delta_days = self.now - login_date
             for days_dict in active_list:
-                if (delta_days <= days_dict["value"]) or \
-                        (days == -1 and self.zero_date == login_date):
+                if delta_days <= days_dict["value"]:
                     days_dict["user_count"] += 1
+                if days == -1 and self.zero_date == login_date:
+                    days_dict["user_count"] += 1
+                    break
 
             groups = api.group.get_groups(user=user)
             for group in groups:
