@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Sun Aug 11 03:52:11 2013\n"
+"POT-Creation-Date: Sun Aug 18 00:19:35 2013\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -43,126 +43,127 @@ msgstr ""
 msgid "Zope source files write permission"
 msgstr ""
 
-#: plone.app.hud:/hud_list_users.pt:15
-msgid "Username"
-msgstr ""
-
-#: plone.app.hud:/hud_list_users.pt:16
-msgid "Full name"
-msgstr ""
-
-#: plone.app.hud:/hud_list_users.pt:17
-msgid "Email"
-msgstr ""
-
-#: plone.app.hud:/hud_list_users.pt:8
-#: plone.app.hud:/hud_list_users.pt:31
+#: plone.app.hud:/hud_list_users.pt:10
+#: plone.app.hud:/hud_list_users.pt:33
 msgid "Back"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:27
-msgid "Options"
+#: plone.app.hud:/hud_list_users.pt:17
+msgid "Username"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:28
-msgid "ID"
+#: plone.app.hud:/hud_list_users.pt:18
+msgid "Full name"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:30
-msgid "Type"
+#: plone.app.hud:/hud_list_users.pt:19
+msgid "Email"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:31
-msgid "Subitems"
+#: plone.app.hud:/hud_list_users.pt:6
+msgid "Filtered by ${filter_title}"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:32
-msgid "Size"
+#: plone.app.hud:/hud_ncdu.pt:122
+msgid "Elapsed time is ${elapsed_seconds} seconds."
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:33
-msgid "Modified"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:34
-msgid "State"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:43
-msgid "Go"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:60
-msgid "Elapsed time is ${DYNAMIC_CONTENT} seconds."
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:67
+#: plone.app.hud:/hud_ncdu.pt:129
 msgid "Invalidate Cache"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:8
-#: plone.app.hud:/hud_ncdu.pt:29
+#: plone.app.hud:/hud_ncdu.pt:33
+msgid "Refresh"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:48
+msgid "Options"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:49
+msgid "ID"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:51
+msgid "Type"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:52
+msgid "Subitems"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:53
+msgid "Size"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:54
+msgid "Modified"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:55
+msgid "State"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:64
+msgid "Go"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:9
+#: plone.app.hud:/hud_ncdu.pt:50
 msgid "Path"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.py:177
+#: plone.app.hud:/hud_ncdu.py:246
 msgid "moment ago"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.py:185
-msgid "{0} hours {1} minutes ago"
+#: plone.app.hud:/hud_ncdu.py:255
+msgid "hours"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.py:188
-msgid "{0} minutes ago"
+#: plone.app.hud:/hud_ncdu.py:255
+#: plone.app.hud:/hud_ncdu.py:259
+msgid "minutes ago"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.py:190
+#: plone.app.hud:/hud_ncdu.py:261
 msgid "few seconds ago"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:17
-msgid "Active: ${DYNAMIC_CONTENT}"
+#: plone.app.hud:/hud_users.pt:18
+msgid "Active: ${active_filter_title}"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:28
-#: plone.app.hud:/hud_users.pt:48
+#: plone.app.hud:/hud_users.pt:29
+#: plone.app.hud:/hud_users.pt:49
 msgid "See"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:37
-msgid "Users in ${DYNAMIC_CONTENT}"
+#: plone.app.hud:/hud_users.pt:38
+msgid "Users in ${group_name}"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:7
+#: plone.app.hud:/hud_users.pt:8
 msgid "Count users"
 msgstr ""
 
-#: plone.app.hud:/hud_users.py:21
-msgid "Filtered by {0} days"
-msgstr ""
-
-#: plone.app.hud:/hud_users.py:28
-msgid "Filtered by {0} group"
-msgstr ""
-
-#: plone.app.hud:/hud_users.py:34
+#: plone.app.hud:/hud_users.py:17
 msgid "Last day"
 msgstr ""
 
-#: plone.app.hud:/hud_users.py:35
+#: plone.app.hud:/hud_users.py:18
 msgid "Last week"
 msgstr ""
 
-#: plone.app.hud:/hud_users.py:36
+#: plone.app.hud:/hud_users.py:19
 msgid "Last month"
 msgstr ""
 
-#: plone.app.hud:/hud_users.py:37
+#: plone.app.hud:/hud_users.py:20
 msgid "Last year"
 msgstr ""
 
-#: plone.app.hud:/hud_users.py:38
+#: plone.app.hud:/hud_users.py:21
 msgid "Never"
 msgstr ""
 
