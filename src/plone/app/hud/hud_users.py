@@ -5,8 +5,6 @@ from plone import api
 from plone.app.hud import _
 from plone.hud.panel import HUDPanelView
 
-import urllib
-
 
 class UsersPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_users.pt')
@@ -24,10 +22,13 @@ class UsersPanelView(HUDPanelView):
 
         elif "filter_by_group" in self.request.form:
             value = self.request.form["filter_by_group"]
-            self.value = urllib.unquote(value)
-            self.title = _(u"Filtered by {0} group").format(self.value)
-            self.users = self.get_filtered_users(by_group=self.value)
-            return ViewPageTemplateFile('hud_list_users.pt')(self)
+            self.request.RESPONSE.redirect(
+                "{0}/@@usergroup-groupmembership?groupname={1}".format(
+                    api.portal.get().absolute_url(),
+                    value
+                )
+            )
+            return
 
         self.count_users = len(self.all_users)
         days_list = [
