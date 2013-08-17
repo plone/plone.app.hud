@@ -16,7 +16,7 @@
         <span i18n:translate="">All these files are writable by Plone, fix it!</span>
         <p>&nbsp;</p>
 
-        <div tal:repeat="entry zope_writable_files">
+        <div class="itemfont" tal:repeat="entry zope_writable_files">
             <div tal:condition="entry/whole_parent">
                 <span i18n:translate="">All in path:</span>
                 <strong tal:content="entry/absparentpath"/>
