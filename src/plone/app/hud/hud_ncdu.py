@@ -10,9 +10,11 @@ from time import time
 from zope.ramcache import ram
 
 import datetime
+import locale
 import logging
 import math
 import pytz
+
 
 ITEMS_PER_PAGE = 50
 
@@ -41,6 +43,8 @@ class NCDUPanelView(HUDPanelView):
             self.path = self.request.form["go"]
         else:
             self.path = self.portal_path
+
+        self.parse_workflow_titles()
         return self.panel_template()
 
     @cache(
@@ -58,6 +62,9 @@ class NCDUPanelView(HUDPanelView):
                     "id": self.portal_id,
                     "rid": None,
                     "type": self.portal.__class__.__name__,
+                    "size": 0,
+                    "state": None,
+                    "modified": self.portal.modified()
                 },
                 "countall": 0
             }
@@ -100,10 +107,12 @@ class NCDUPanelView(HUDPanelView):
         children = root["children"]
         if children:
             for child in children:
-                root["countall"] += self.recount(children[child]) + 1
-            return root["countall"]
+                subitems, size = self.recount(children[child])
+                root["countall"] += subitems + 1
+                root["item"]["size"] += size
+            return root["countall"], root["item"]["size"]
         else:
-            return 0
+            return 0, root["item"]["size"]
 
     def get_item(self, brain):
         item = {
@@ -112,11 +121,31 @@ class NCDUPanelView(HUDPanelView):
             "id": brain.getId,
             "rid": brain.getRID(),
             "type": brain.Type,
-            "size": brain.getObjSize,
-            "state": str(brain.review_state),
+            "size": self.get_kbytes(brain.getObjSize),
+            "state": self.workflows[brain.review_state],
             "modified": brain.ModificationDate
         }
         return item
+
+    def get_kbytes(self, size_in_text):
+        ssize = str(size_in_text).upper()
+
+        # get rid of spaces all around
+        while " " in ssize:
+            ssize = ssize.replace(" ", "")
+
+        units = ["KB", "MB", "GB", "TB"]
+        level = -1
+        current_unit = ""
+        for unit in units:
+            level += 1
+            if unit in ssize:
+                current_unit = unit
+                break
+
+        fsize = locale.atof(ssize.replace(current_unit, ""))
+        bytes = fsize * 10 ** (level * 3)
+        return bytes
 
     def filter_results_by_path(self):
         results = self._get_all_results()
@@ -126,17 +155,17 @@ class NCDUPanelView(HUDPanelView):
             if str_id in root_item["children"]:
                 root_item = root_item["children"][str_id]
         items = []
+        self.current_root = root_item
         for str_id in root_item["children"]:
             item = root_item["children"][str_id]["item"]
             countall = root_item["children"][str_id]["countall"]
             # if item is not None:
             items += [{"countall": countall, "item": item}]
-        items = sorted(items, key=lambda child: child["item"]["id"])
+        items = sorted(items, key=lambda child: child["item"]["modified"])
         return items
 
     def get_list(self):
         start_time = time()
-        logger.info("Start database scan.".format(start_time))
         result = self.filter_results_by_path()
         end_time = time()
         self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
@@ -185,7 +214,7 @@ class NCDUPanelView(HUDPanelView):
             self.page_numbers["next"] = str(self.page_number + 1)
             self.page_numbers["last"] = str(last_page)
 
-        return result[start_item:end_item]
+        return result[start_item:end_item + 1]
 
     def format_datetime_friendly_ago(self, date):
         """ Format date & time using site specific settings.
@@ -228,3 +257,11 @@ class NCDUPanelView(HUDPanelView):
                     return _(u"{0} minutes ago").format(minutes)
                 else:
                     return _(u"few seconds ago")
+
+    def parse_workflow_titles(self):
+        workflow_tool = api.portal.get_tool('portal_workflow')
+        wf_list = workflow_tool.listWFStatesByTitle()
+        wf_dict = {}
+        for wf_title, wf_id in wf_list:
+            wf_dict[wf_id] = wf_title
+        self.workflows = wf_dict

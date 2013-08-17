@@ -13,7 +13,7 @@
                         type="hidden"
                         name="go"
                         tal:attributes="value button/path"/>
-                    <input type="submit" tal:attributes="value button/id"/>
+                    <input class="sidebyside" type="submit" tal:attributes="value button/id"/>
                 </form>
             </td>
         </tr>
@@ -21,7 +21,27 @@
 
     <p>&nbsp;</p>
 
-    <table class="listing">
+    <table class="listing itemfont">
+        <tr tal:define="root view/current_root">
+            <td>
+                <form action="" method="POST">
+                    <input
+                        type="hidden"
+                        name="go"
+                        tal:attributes="value root/item/path"/>
+                    <input type="submit" value="Refresh" i18n:attributes="value"/>
+                </form>
+            </td>
+            <td tal:content="root/item/id" />
+            <td>
+                <a tal:attributes="href root/item/url" tal:content="root/item/path" />
+            </td>
+            <td tal:content="root/item/type" />
+            <td tal:content="root/countall" />
+            <td tal:content="root/item/size" />
+            <td tal:content="python: view.format_datetime_friendly_ago(root['item']['modified'])" />
+            <td tal:content="root/item/state" />
+        </tr>
 
         <tr>
             <th i18n:translate="">Options</th>
