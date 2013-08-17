@@ -1,8 +1,25 @@
-.sticker {
+div.constraintelement {
+    width: 800px;
+}
+
+table.sticker {
     display: inline-table;
-    margin: 8px;
+    margin: 5px;
+    width: 230px;
+    table-layout: fixed;
+}
+
+table.sticker th {
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .sidebyside {
     display:inline-block;
+    margin: 3px;
+}
+
+.itemfont {
+    font-size: small;
 }
