@@ -2,7 +2,9 @@
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone.app.hud">
 
-    <h2 tal:content="view/title" />
+    <h2 i18n:translate="">
+        Filtered by <span i18n:name="filter_title" tal:replace="view/title" />
+    </h2>
 
     <form action="" method="POST">
         <input type="submit" value="Back" i18n:attributes="value"/>

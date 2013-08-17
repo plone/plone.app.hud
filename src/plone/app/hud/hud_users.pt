@@ -15,7 +15,7 @@
     <table class="listing sticker" tal:repeat="item view/active_users">
         <tr>
             <th colspan="2" i18n:translate="">
-                Active: <span tal:replace="item/title"/>
+                Active: <span i18n:name="active_filter_title" tal:replace="item/title"/>
             </th>
         </tr>
         <tr>
@@ -35,7 +35,7 @@
     <table class="listing sticker" tal:repeat="group view/groups">
         <tr>
             <th colspan="2" i18n:translate="">
-                Users in <span tal:replace="group"/>
+                Users in <span i18n:name="group_name" tal:replace="group"/>
             </th>
         </tr>
         <tr>

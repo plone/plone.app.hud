@@ -13,10 +13,17 @@ class UsersPanelView(HUDPanelView):
         self.all_users = api.user.get_users()
         self.zero_date = DateTime('2000/01/01 00:00:00 GMT+1')
         self.now = DateTime()
+        self.days_list = [
+            (_(u"Last day"), 1),
+            (_(u"Last week"), 7),
+            (_(u"Last month"), 31),
+            (_(u"Last year"), 366),
+            (_(u"Never"), -1)
+        ]
 
         if "filter_by_days" in self.request.form:
             self.value = self.request.form["filter_by_days"]
-            self.title = _(u"Filtered by {0} days").format(self.value)
+            self.title = self.get_day_filter_title(self.value)
             self.users = self.get_filtered_users(by_days=self.value)
             return ViewPageTemplateFile('hud_list_users.pt')(self)
 
@@ -31,15 +38,14 @@ class UsersPanelView(HUDPanelView):
             return
 
         self.count_users = len(self.all_users)
-        days_list = [
-            (_(u"Last day"), 1),
-            (_(u"Last week"), 7),
-            (_(u"Last month"), 31),
-            (_(u"Last year"), 366),
-            (_(u"Never"), -1)
-        ]
-        self.process_all(days_list=days_list)
+        self.process_all(days_list=self.days_list)
         return self.panel_template()
+
+    def get_day_filter_title(self, value):
+        for dtitle, dvalue in self.days_list:
+            if value == str(dvalue):
+                return dtitle
+        return str(value)
 
     def process_all(self, days_list):
         active_list = []
