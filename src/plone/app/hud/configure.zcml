@@ -13,6 +13,8 @@
     <!-- Include configuration for dependencies listed in setup.py -->
     <includeDependencies package="." />
 
+    <i18n:registerTranslations directory="translation/locales" />
+
     <!-- Register the installation GenericSetup extension profile -->
     <genericsetup:registerProfile
         name="default"
