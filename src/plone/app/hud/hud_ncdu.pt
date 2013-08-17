@@ -119,7 +119,7 @@
     <p>&nbsp;</p>
 
     <p i18n:translate="">
-        Elapsed time is <span tal:replace="view/process_time" /> seconds.
+        Elapsed time is <span i18n:name="elapsed_seconds" tal:replace="view/process_time" /> seconds.
     </p>
 
     <p>&nbsp;</p>

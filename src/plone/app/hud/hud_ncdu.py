@@ -251,10 +251,12 @@ class NCDUPanelView(HUDPanelView):
             hours = math.floor(seconds / 3600.0)
             minutes = math.floor((seconds % 3600) / 60)
             if hours > 0:
-                return _(u"{0} hours {1} minutes ago").format(hours, minutes)
+                return "{0} {1} {2} {3}".format(
+                    hours, _(u"hours"), minutes, _(u"minutes ago")
+                )
             else:
                 if minutes > 0:
-                    return _(u"{0} minutes ago").format(minutes)
+                    return "{0} {1}".format(minutes, _(u"minutes ago"))
                 else:
                     return _(u"few seconds ago")
 
