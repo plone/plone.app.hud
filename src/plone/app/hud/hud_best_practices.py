@@ -68,3 +68,14 @@ class BestPracticesPanelView(HUDPanelView):
                 else:
                     roles_dict[role] = 1
         return roles_dict
+
+    def get_broken_klasses(self):
+        import OFS.Uninstalled
+        broken_klasses = OFS.Uninstalled.broken_klasses.keys()
+        result = []
+        for kmodule, kname in broken_klasses:
+            result += [{
+                "module": kmodule,
+                "name": kname
+            }]
+        return result

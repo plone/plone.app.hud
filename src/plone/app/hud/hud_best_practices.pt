@@ -3,7 +3,8 @@
      i18n:domain="plone.app.hud"
      tal:define="zope_writable_files view/zope_writable_files;
                  from_mail_address view/get_from_mail_address;
-                 roles_dict view/count_users_with_roles;">
+                 roles_dict view/count_users_with_roles;
+                 broken_klasses view/get_broken_klasses;">
 
 
     <h2 i18n:translate="">From Mail Address</h2>
@@ -15,6 +16,30 @@
     <div tal:condition="from_mail_address">
         <span i18n:translate="">
             'from' email address is configured, good job!
+        </span>
+    </div>
+    <p>&nbsp;</p>
+
+
+    <h2 i18n:translate="">Broken Klasses</h2>
+    <div tal:condition="broken_klasses">
+        <span i18n:translate="">
+            There is one or more broken classes, fix it!
+        </span>
+        <table class="listing itemfont">
+            <tr>
+                <th i18n:translate="">Module</th>
+                <th i18n:translate="">Class</th>
+            </tr>
+            <tr tal:repeat="klass broken_klasses">
+                <td tal:content="klass/module" />
+                <td tal:content="klass/name" />
+            </tr>
+        </table>
+    </div>
+    <div tal:condition="not: broken_klasses">
+        <span i18n:translate="">
+            There no broken classes, good job!
         </span>
     </div>
     <p>&nbsp;</p>
