@@ -56,3 +56,15 @@ class BestPracticesPanelView(HUDPanelView):
     def get_from_mail_address(self):
         email_from_address = api.portal.get().getProperty('email_from_address')
         return email_from_address if email_from_address else None
+
+    def count_users_with_roles(self):
+        roles_dict = {}
+        all_users = api.user.get_users()
+        for user in all_users:
+            users_roles = api.user.get_roles(user=user)
+            for role in users_roles:
+                if role in roles_dict:
+                    roles_dict[role] += 1
+                else:
+                    roles_dict[role] = 1
+        return roles_dict
