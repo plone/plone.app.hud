@@ -30,6 +30,10 @@
 
     <div tal:condition="zope_writable_files">
         <span i18n:translate="">All these files are writable by Plone, fix it!</span>
+        <br/>
+        <span i18n:translate="" class="itemfont">
+            It is a security issue if Plone instance has write permission to Zope files.
+        </span>
         <p>&nbsp;</p>
 
         <div class="itemfont" tal:repeat="entry zope_writable_files">
