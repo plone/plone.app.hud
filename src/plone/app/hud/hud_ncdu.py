@@ -204,7 +204,7 @@ class NCDUPanelView(HUDPanelView):
             self.page_numbers["this"] = str(self.page_number)
         end_item = start_item + ITEMS_PER_PAGE - 1
         last_item = len(result) - 1
-        last_page = ((last_item + 1) / ITEMS_PER_PAGE)
+        last_page = int(math.ceil((last_item + 1.0) / ITEMS_PER_PAGE))
         if end_item >= last_item:
             end_item = last_item
             self.page_numbers["this"] = str(last_page)
