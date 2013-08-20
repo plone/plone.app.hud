@@ -52,3 +52,7 @@ class BestPracticesPanelView(HUDPanelView):
             ]
 
         return w_entries
+
+    def get_from_mail_address(self):
+        email_from_address = api.portal.get().getProperty('email_from_address')
+        return email_from_address if email_from_address else None

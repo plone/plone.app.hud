@@ -1,7 +1,23 @@
 
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone.app.hud"
-     tal:define="zope_writable_files view/zope_writable_files">
+     tal:define="zope_writable_files view/zope_writable_files;
+                 from_mail_address view/get_from_mail_address;">
+
+
+    <h2 i18n:translate="">From Mail Address</h2>
+    <div tal:condition="not: from_mail_address">
+        <span i18n:translate="">
+            'from' email address is not configured, fix it!
+        </span>
+    </div>
+    <div tal:condition="from_mail_address">
+        <span i18n:translate="">
+            'from' email address is configured, good job!
+        </span>
+    </div>
+    <p>&nbsp;</p>
+
 
     <h2 i18n:translate="">
         Zope source files write permission
