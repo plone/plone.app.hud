@@ -78,7 +78,8 @@ class SecurityAdvisoriesView(HUDPanelView):
 
         return sorted(
             result,
-            key=lambda item: item['updated']
+            key=lambda item: item['updated'],
+            reverse=True
         )
 
     def _get_subitem(self, entry, name):

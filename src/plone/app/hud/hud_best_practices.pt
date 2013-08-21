@@ -8,8 +8,8 @@
                  is_caching_installed view/is_caching_installed;">
 
 
-    <div tal:attributes="class python: '' if is_caching_installed else 'warning_item'" >
-        <h2 i18n:translate="">Caching</h2>
+    <div tal:attributes="class python: 'normal_item' if is_caching_installed else 'warning_item'" >
+        <h3 i18n:translate="">Caching</h3>
         <div tal:condition="not: is_caching_installed">
             <span i18n:translate="">
                 plone.app.caching is not installed, fix it!
@@ -24,100 +24,106 @@
     <p>&nbsp;</p>
 
 
-    <h2 i18n:translate="">From Mail Address</h2>
-    <div tal:condition="not: from_mail_address">
-        <span i18n:translate="">
-            'from' email address is not configured, fix it!
-        </span>
-    </div>
-    <div tal:condition="from_mail_address">
-        <span i18n:translate="">
-            'from' email address is configured, good job!
-        </span>
-    </div>
-    <p>&nbsp;</p>
-
-
-    <h2 i18n:translate="">Broken Klasses</h2>
-    <div tal:condition="broken_klasses">
-        <span i18n:translate="">
-            There is one or more broken classes, fix it!
-        </span>
-        <table class="listing itemfont">
-            <tr>
-                <th i18n:translate="">Module</th>
-                <th i18n:translate="">Class</th>
-            </tr>
-            <tr tal:repeat="klass broken_klasses">
-                <td tal:content="klass/module" />
-                <td tal:content="klass/name" />
-            </tr>
-        </table>
-    </div>
-    <div tal:condition="not: broken_klasses">
-        <span i18n:translate="">
-            There no broken classes, good job!
-        </span>
+    <div tal:attributes="class python: 'normal_item' if from_mail_address else 'warning_item'" >
+        <h3 i18n:translate="">From Mail Address</h3>
+        <div tal:condition="not: from_mail_address">
+            <span i18n:translate="">
+                'from' email address is not configured, fix it!
+            </span>
+        </div>
+        <div tal:condition="from_mail_address">
+            <span i18n:translate="">
+                'from' email address is configured, good job!
+            </span>
+        </div>
     </div>
     <p>&nbsp;</p>
 
 
-    <h2 i18n:translate="">Users With Roles</h2>
-    <div tal:condition="not: roles_dict">
-        <span i18n:translate="">
-            No user has no role, good job!
-        </span>
-    </div>
-    <div tal:condition="roles_dict">
-        <span i18n:translate="">
-            Following roles are assigned directly to users, fix it!
-        </span>
-        <br/>
-        <span i18n:translate="" class="itemfont">
-            Best practice is to have roles assigned to groups and users to groups.
-        </span>
-        <table class="listing itemfont">
-            <tr>
-                <th i18n:translate="">Role</th>
-                <th i18n:translate="">Count users</th>
-            </tr>
-            <tr tal:repeat="role roles_dict">
-                <td tal:content="role" />
-                <td tal:content="python: roles_dict[role]" />
-            </tr>
-        </table>
+    <div tal:attributes="class python: 'warning_item' if broken_klasses else 'normal_item'" >
+        <h3 i18n:translate="">Broken Klasses</h3>
+        <div tal:condition="broken_klasses">
+            <span i18n:translate="">
+                There is one or more broken classes, fix it!
+            </span>
+            <table class="listing itemfont">
+                <tr>
+                    <th i18n:translate="">Module</th>
+                    <th i18n:translate="">Class</th>
+                </tr>
+                <tr tal:repeat="klass broken_klasses">
+                    <td tal:content="klass/module" />
+                    <td tal:content="klass/name" />
+                </tr>
+            </table>
+        </div>
+        <div tal:condition="not: broken_klasses">
+            <span i18n:translate="">
+                There no broken classes, good job!
+            </span>
+        </div>
     </div>
     <p>&nbsp;</p>
 
 
-    <h2 i18n:translate="">
-        Zope source files write permission
-    </h2>
-
-    <div tal:condition="not: zope_writable_files">
-        <span i18n:translate="">No source files are writable by Plone, good job!</span>
-        <p>&nbsp;</p>
+    <div tal:attributes="class python: 'warning_item' if roles_dict else 'normal_item'" >
+        <h3 i18n:translate="">Users With Roles</h3>
+        <div tal:condition="not: roles_dict">
+            <span i18n:translate="">
+                No user has no role, good job!
+            </span>
+        </div>
+        <div tal:condition="roles_dict">
+            <span i18n:translate="">
+                Following roles are assigned directly to users, fix it!
+            </span>
+            <br/>
+            <span i18n:translate="" class="itemfont">
+                Best practice is to have roles assigned to groups and users to groups.
+            </span>
+            <table class="listing itemfont">
+                <tr>
+                    <th i18n:translate="">Role</th>
+                    <th i18n:translate="">Count users</th>
+                </tr>
+                <tr tal:repeat="role roles_dict">
+                    <td tal:content="role" />
+                    <td tal:content="python: roles_dict[role]" />
+                </tr>
+            </table>
+        </div>
     </div>
+    <p>&nbsp;</p>
 
-    <div tal:condition="zope_writable_files">
-        <span i18n:translate="">All these files are writable by Plone, fix it!</span>
-        <br/>
-        <span i18n:translate="" class="itemfont">
-            It is a security issue if Plone instance has write permission to Zope files.
-        </span>
-        <p>&nbsp;</p>
 
-        <div class="itemfont" tal:repeat="entry zope_writable_files">
-            <div tal:condition="entry/whole_parent">
-                <span i18n:translate="">All in path:</span>
-                <strong tal:content="entry/absparentpath"/>
-            </div>
-            <div tal:condition="not: entry/whole_parent">
-                <span i18n:translate="">In path:</span>
-                <strong tal:content="entry/absparentpath"/>
-                <ul tal:repeat="item entry/contents">
-                    &nbsp;<li tal:content="item" />
-                </ul>
+    <div tal:attributes="class python: 'warning_item' if zope_writable_files else 'normal_item'" >
+        <h3 i18n:translate="">
+            Zope source files write permission
+        </h3>
+        <div tal:condition="not: zope_writable_files">
+            <span i18n:translate="">No source files are writable by Plone, good job!</span>
+            <p>&nbsp;</p>
+        </div>
+        <div tal:condition="zope_writable_files">
+            <span i18n:translate="">All these files are writable by Plone, fix it!</span>
+            <br/>
+            <span i18n:translate="" class="itemfont">
+                It is a security issue if Plone instance has write permission to Zope files.
+            </span>
+            <p>&nbsp;</p>
+
+            <div class="itemfont" tal:repeat="entry zope_writable_files">
+                <div tal:condition="entry/whole_parent">
+                    <span i18n:translate="">All in path:</span>
+                    <strong tal:content="entry/absparentpath"/>
+                </div>
+                <div tal:condition="not: entry/whole_parent">
+                    <span i18n:translate="">In path:</span>
+                    <strong tal:content="entry/absparentpath"/>
+                    <ul tal:repeat="item entry/contents">
+                        &nbsp;<li tal:content="item" />
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

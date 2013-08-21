@@ -7,7 +7,7 @@
     <p>&nbsp;</p>
 
     <div tal:repeat="entry entries">
-        <div tal:attributes="class python: '' if entry['marked_as_read'] else 'warning_item'" >
+        <div tal:attributes="class python: 'normal_item' if entry['marked_as_read'] else 'warning_item'" >
             <h3>
                 <a tal:content="entry/title"
                    tal:attributes="href entry/link" />

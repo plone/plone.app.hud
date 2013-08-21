@@ -24,10 +24,14 @@ table.sticker th {
     font-size: small;
 }
 
+.normal_item {
+    padding: 6px;
+}
+
 .warning_item {
     padding: 5px;
     border-style: solid;
     border-color: #FF0000;
     border-width: 1px;
-    background-color: #FFEEEA;
+    background-color: #FFFAFA;
 }
