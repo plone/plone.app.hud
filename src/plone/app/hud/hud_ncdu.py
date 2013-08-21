@@ -25,6 +25,7 @@ logger = logging.getLogger("plone.app.hud.hud_ncdu")
 
 class NCDUPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_ncdu.pt')
+    title = _(u"NCDU")
 
     def render(self):
         if "invalidate_cache" in self.request.form:

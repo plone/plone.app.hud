@@ -8,6 +8,7 @@ from plone.hud.panel import HUDPanelView
 
 class UsersPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_users.pt')
+    title = _(u"Users")
 
     def render(self):
         self.all_users = api.user.get_users()

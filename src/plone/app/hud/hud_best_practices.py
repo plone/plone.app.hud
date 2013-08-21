@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+from plone.app.hud import _
 from plone.hud.panel import HUDPanelView
 
 import os
@@ -8,6 +9,7 @@ import os
 
 class BestPracticesPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_best_practices.pt')
+    title = _(u"Best Practices")
 
     def render(self):
         portal = api.portal.get()
