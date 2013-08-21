@@ -4,7 +4,24 @@
      tal:define="zope_writable_files view/zope_writable_files;
                  from_mail_address view/get_from_mail_address;
                  roles_dict view/count_users_with_roles;
-                 broken_klasses view/get_broken_klasses;">
+                 broken_klasses view/get_broken_klasses;
+                 is_caching_installed view/is_caching_installed;">
+
+
+    <div tal:attributes="class python: '' if is_caching_installed else 'warning_item'" >
+        <h2 i18n:translate="">Caching</h2>
+        <div tal:condition="not: is_caching_installed">
+            <span i18n:translate="">
+                plone.app.caching is not installed, fix it!
+            </span>
+        </div>
+        <div tal:condition="is_caching_installed">
+            <span i18n:translate="">
+                plone.app.caching is installed, good job!
+            </span>
+        </div>
+    </div>
+    <p>&nbsp;</p>
 
 
     <h2 i18n:translate="">From Mail Address</h2>

@@ -16,6 +16,7 @@ class BestPracticesPanelView(HUDPanelView):
         self.zope_writable_files = self.check_write_permissions(
             portal.Control_Panel.getSOFTWARE_HOME()
         )
+        self.check_caching()
         return self.panel_template()
 
     def check_write_permissions(self, directory):
@@ -81,3 +82,8 @@ class BestPracticesPanelView(HUDPanelView):
                 "name": kname
             }]
         return result
+
+    def check_caching(self):
+        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.is_caching_installed = \
+            self.installer.isProductInstalled('plone.app.caching')
