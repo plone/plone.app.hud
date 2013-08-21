@@ -65,4 +65,16 @@
         class="plone.app.hud.hud_users.UsersPanelView"
         permission="plone.app.hud.userspanel"
         />
+
+    <permission
+        id="plone.app.hud.securitypanel"
+        title="HUD: Security Advisories Panel Permission"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="hud_security"
+        class="plone.app.hud.hud_security_advisories.SecurityAdvisoriesView"
+        permission="plone.app.hud.securitypanel"
+        />
 </configure>

@@ -43,4 +43,17 @@
             <permission>HUD: Users Panel Permission</permission>
     </configlet>
 
+    <configlet
+        title="Security Advisories"
+        action_id="security.panel"
+        appId="hud_security"
+        category="HUD"
+        condition_expr=""
+        url_expr="string:${portal_url}/@@hud_security"
+        icon_expr=""
+        visible="True"
+        i18n:attributes="title">
+            <permission>HUD: Security Advisories Panel Permission</permission>
+    </configlet>
+
 </object>

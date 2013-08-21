@@ -1,0 +1,40 @@
+<div tal:define="entries view/feed_data">
+
+    <form action="" method="POST">
+        <input type="hidden" name="invalidate_cache"/>
+        <input type="submit" value="Refresh" i18n:attributes="value"/>
+    </form>
+    <p>&nbsp;</p>
+
+    <div tal:repeat="entry entries">
+        <div tal:attributes="class python: '' if entry['marked_as_read'] else 'warning_item'" >
+            <h3>
+                <a tal:content="entry/title"
+                   tal:attributes="href entry/link" />
+            </h3>
+            <p class="itemfont" tal:content="entry/updated"/>
+            <p class="itemfont" tal:content="entry/summary"/>
+            <form action="" method="POST">
+                <input
+                    type="hidden"
+                    name="toggle_mark"
+                    tal:attributes="value entry/hash"/>
+                <input tal:condition="entry/marked_as_read"
+                       type="submit"
+                       value="Mark as Unread"
+                       i18n:attributes="value"/>
+                <input tal:condition="not: entry/marked_as_read"
+                       type="submit"
+                       value="Mark as Read"
+                       i18n:attributes="value"/>
+            </form>
+        </div>
+        <p>&nbsp;</p>
+    </div>
+
+    <form action="" method="POST">
+        <input type="hidden" name="invalidate_cache"/>
+        <input type="submit" value="Refresh" i18n:attributes="value"/>
+    </form>
+
+</div>
