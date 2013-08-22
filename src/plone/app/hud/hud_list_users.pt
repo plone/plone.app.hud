@@ -3,7 +3,7 @@
      i18n:domain="plone.app.hud">
 
     <h2 i18n:translate="">
-        Filtered by <span i18n:name="filter_title" tal:replace="view/title" />
+        Filtered by <span i18n:name="filter_title" tal:replace="view/filter_title" />
     </h2>
 
     <form action="" method="POST">

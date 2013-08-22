@@ -24,7 +24,7 @@ class UsersPanelView(HUDPanelView):
 
         if "filter_by_days" in self.request.form:
             self.value = self.request.form["filter_by_days"]
-            self.title = self.get_day_filter_title(self.value)
+            self.filter_title = self.get_day_filter_title(self.value)
             self.users = self.get_filtered_users(by_days=self.value)
             return ViewPageTemplateFile('hud_list_users.pt')(self)
 
