@@ -39,6 +39,7 @@ class NCDUPanelView(HUDPanelView):
         self.portal = api.portal.get()
         self.portal_id = self.portal.absolute_url_path()[1:]
         self.portal_path = self.portal.absolute_url_path()
+        self.process_time = None
 
         if "go" in self.request.form:
             self.path = self.request.form["go"]
@@ -53,6 +54,9 @@ class NCDUPanelView(HUDPanelView):
         get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(ncdu_cache)
     )
     def _get_all_results(self):
+        start_time = time()
+        logger.info("Scanning database ...")
+
         results = self.context.portal_catalog.searchResults()
         items = {
             self.portal_id: {
@@ -75,6 +79,14 @@ class NCDUPanelView(HUDPanelView):
             self.add_item(item, items)
 
         self.recount(items[self.portal_id])
+
+        end_time = time()
+        self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
+        logger.info(
+            "End of database scan. Elapsed time is {0} seconds.".format(
+                self.process_time
+            )
+        )
         return items
 
     def add_item(self, item, items):
@@ -166,15 +178,7 @@ class NCDUPanelView(HUDPanelView):
         return items
 
     def get_list(self):
-        start_time = time()
         result = self.filter_results_by_path()
-        end_time = time()
-        self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
-        logger.info(
-            "End of database scan. Elapsed time is {0} seconds.".format(
-                self.process_time
-            )
-        )
 
         path_list = self.path.split("/")[1:]
         self.clickable_path_list = []
