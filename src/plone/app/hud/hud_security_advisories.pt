@@ -2,7 +2,7 @@
 
     <form action="" method="POST">
         <input type="hidden" name="invalidate_cache"/>
-        <input type="submit" value="Refresh" i18n:attributes="value"/>
+        <input type="submit" value="Check feed" i18n:attributes="value"/>
     </form>
     <p>&nbsp;</p>
 
@@ -34,7 +34,7 @@
 
     <form action="" method="POST">
         <input type="hidden" name="invalidate_cache"/>
-        <input type="submit" value="Refresh" i18n:attributes="value"/>
+        <input type="submit" value="Check feed" i18n:attributes="value"/>
     </form>
 
 </div>

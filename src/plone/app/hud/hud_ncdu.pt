@@ -23,7 +23,7 @@
     <p>&nbsp;</p>
 
     <div class="tagdiv">
-        <p>Container</p>
+        <p i18n:translate="">Container</p>
         <table class="listing itemfont">
             <tr>
                 <th i18n:translate="">Options</th>
@@ -62,7 +62,7 @@
 
 
     <div class="tagdiv">
-        <p>Items</p>
+        <p i18n:translate="">Items</p>
         <table class="listing itemfont">
             <tr>
                 <th i18n:translate="">Options</th>
