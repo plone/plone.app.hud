@@ -12,7 +12,7 @@
 
     <p>&nbsp;</p>
 
-    <table class="listing">
+    <table class="listing itemfont">
         <tr>
             <th i18n:translate="">Username</th>
             <th i18n:translate="">Full name</th>

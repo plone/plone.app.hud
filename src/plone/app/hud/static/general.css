@@ -35,3 +35,21 @@ table.sticker th {
     border-width: 1px;
     background-color: #FFFAFA;
 }
+
+table.clickablepath th {
+    background-color: #DDD;
+    padding: 5px;
+}
+
+table.clickablepath td {
+    border-width: 1px 1px 1px 0px;
+    border-style: solid;
+    border-color: #DDD;
+}
+
+.tagdiv p {
+    font-weight: bold;
+    padding: 5px;
+    background-color: #DDD;
+    display: inline-block;
+}

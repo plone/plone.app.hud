@@ -3,11 +3,11 @@
      tal:define="list view/get_list;
                  root view/current_root;">
 
-    <table>
+    <table class="clickablepath">
         <tr>
-            <td>
-                <span i18n:translate="">Path</span>:&nbsp;
-            </td>
+            <th>
+                <span i18n:translate="">Path</span>
+            </th>
             <td tal:repeat="button view/clickable_path_list">
                 <form action="" method="POST">
                     <input
@@ -22,60 +22,81 @@
 
     <p>&nbsp;</p>
 
-    <table class="listing itemfont">
-        <tr>
-            <td>
-                <form action="" method="POST">
-                    <input
-                        type="hidden"
-                        name="go"
-                        tal:attributes="value root/item/path"/>
-                    <input type="submit" value="Refresh" i18n:attributes="value"/>
-                </form>
-            </td>
-            <td tal:content="root/item/id" />
-            <td>
-                <a tal:attributes="href root/item/url" tal:content="root/item/path" />
-            </td>
-            <td tal:content="root/item/type" />
-            <td tal:content="root/countall" />
-            <td tal:content="root/item/size" />
-            <td tal:content="python: view.format_datetime_friendly_ago(root['item']['modified'])" />
-            <td tal:content="root/item/state" />
-        </tr>
+    <div class="tagdiv">
+        <p>Container</p>
+        <table class="listing itemfont">
+            <tr>
+                <th i18n:translate="">Options</th>
+                <th i18n:translate="">ID</th>
+                <th i18n:translate="">Path</th>
+                <th i18n:translate="">Type</th>
+                <th i18n:translate="">Subitems</th>
+                <th i18n:translate="">Size</th>
+                <th i18n:translate="">Modified</th>
+                <th i18n:translate="">State</th>
+            </tr>
 
-        <tr>
-            <th i18n:translate="">Options</th>
-            <th i18n:translate="">ID</th>
-            <th i18n:translate="">Path</th>
-            <th i18n:translate="">Type</th>
-            <th i18n:translate="">Subitems</th>
-            <th i18n:translate="">Size</th>
-            <th i18n:translate="">Modified</th>
-            <th i18n:translate="">State</th>
-        </tr>
-        <tr tal:repeat="parent list">
-            <td>
-                <form action="" method="POST">
-                    <input
-                        type="hidden"
-                        name="go"
-                        tal:attributes="value parent/item/path"/>
-                    <input type="submit" value="Go" i18n:attributes="value"/>
-                </form>
-            </td>
-            <td tal:content="parent/item/id" />
-            <td>
-                <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
-            </td>
-            <td tal:content="parent/item/type" />
-            <td tal:content="parent/countall" />
-            <td tal:content="parent/item/size" />
-            <td tal:content="python: view.format_datetime_friendly_ago(parent['item']['modified'])" />
-            <td tal:content="parent/item/state" />
-        </tr>
+            <tr>
+                <td>
+                    <form action="" method="POST">
+                        <input
+                            type="hidden"
+                            name="go"
+                            tal:attributes="value root/item/path"/>
+                        <input type="submit" value="Refresh" i18n:attributes="value"/>
+                    </form>
+                </td>
+                <td tal:content="root/item/id" />
+                <td>
+                    <a tal:attributes="href root/item/url" tal:content="root/item/path" />
+                </td>
+                <td tal:content="root/item/type" />
+                <td tal:content="root/countall" />
+                <td tal:content="root/item/size" />
+                <td tal:content="python: view.format_datetime_friendly_ago(root['item']['modified'])" />
+                <td tal:content="root/item/state" />
+            </tr>
+        </table>
+    </div>
+    <p>&nbsp;</p>
 
-    </table>
+
+    <div class="tagdiv">
+        <p>Items</p>
+        <table class="listing itemfont">
+            <tr>
+                <th i18n:translate="">Options</th>
+                <th i18n:translate="">ID</th>
+                <th i18n:translate="">Path</th>
+                <th i18n:translate="">Type</th>
+                <th i18n:translate="">Subitems</th>
+                <th i18n:translate="">Size</th>
+                <th i18n:translate="">Modified</th>
+                <th i18n:translate="">State</th>
+            </tr>
+            <tr tal:repeat="parent list">
+                <td>
+                    <form action="" method="POST">
+                        <input
+                            type="hidden"
+                            name="go"
+                            tal:attributes="value parent/item/path"/>
+                        <input type="submit" value="Go" i18n:attributes="value"/>
+                    </form>
+                </td>
+                <td tal:content="parent/item/id" />
+                <td>
+                    <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
+                </td>
+                <td tal:content="parent/item/type" />
+                <td tal:content="parent/countall" />
+                <td tal:content="parent/item/size" />
+                <td tal:content="python: view.format_datetime_friendly_ago(parent['item']['modified'])" />
+                <td tal:content="parent/item/state" />
+            </tr>
+
+        </table>
+    </div>
 
     <p>&nbsp;</p>
 
@@ -118,11 +139,11 @@
 
     <p>&nbsp;</p>
 
-    <p i18n:translate="">
+    <p i18n:translate="" tal:condition="view/process_time">
         Elapsed time is <span i18n:name="elapsed_seconds" tal:replace="view/process_time" /> seconds.
+        <br/>&nbsp;
     </p>
 
-    <p>&nbsp;</p>
 
     <form action="" method="POST">
         <input type="hidden" name="invalidate_cache">
