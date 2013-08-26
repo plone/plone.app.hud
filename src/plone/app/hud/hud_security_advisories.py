@@ -105,11 +105,18 @@ class SecurityAdvisoriesView(HUDPanelView):
         if self.toggle_mark == shahash:
             marked_as_read = not marked_as_read
 
+        updated_datetime = datetime.fromtimestamp(mktime(
+            updated_parsed
+        ))
+
+        localized_time = self.context.toLocalizedTime(updated_datetime)
+
         item = {
             "title": title,
             "hash": shahash,
             "marked_as_read": marked_as_read,
-            "updated": datetime.fromtimestamp(mktime(updated_parsed)),
+            "localized_time": localized_time,
+            "updated": updated_datetime,
             "summary": summary,
             "link": link,
         }

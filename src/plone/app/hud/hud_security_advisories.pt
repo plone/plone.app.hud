@@ -12,7 +12,7 @@
                 <a tal:content="entry/title"
                    tal:attributes="href entry/link" />
             </h3>
-            <p class="itemfont" tal:content="entry/updated"/>
+            <p class="itemfont" tal:content="entry/localized_time"/>
             <p class="itemfont" tal:content="entry/summary"/>
             <form action="" method="POST">
                 <input
