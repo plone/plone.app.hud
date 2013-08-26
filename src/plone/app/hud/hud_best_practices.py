@@ -85,5 +85,15 @@ class BestPracticesPanelView(HUDPanelView):
 
     def check_caching(self):
         self.installer = api.portal.get_tool('portal_quickinstaller')
+
         self.is_caching_installed = \
             self.installer.isProductInstalled('plone.app.caching')
+
+        registry = api.portal.get_tool('portal_registry')
+        if registry.get('plone.caching.interfaces.ICacheSettings.enabled'):
+            self.is_caching_enabled = True
+        else:
+            self.is_caching_enabled = False
+
+        self.is_caching_ok = \
+            self.is_caching_installed and self.is_caching_enabled

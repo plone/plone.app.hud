@@ -5,10 +5,12 @@
                  from_mail_address view/get_from_mail_address;
                  roles_dict view/count_users_with_roles;
                  broken_klasses view/get_broken_klasses;
-                 is_caching_installed view/is_caching_installed;">
+                 is_caching_ok view/is_caching_ok;
+                 is_caching_installed view/is_caching_installed;
+                 is_caching_enabled view/is_caching_enabled;">
 
 
-    <div tal:attributes="class python: 'normal_item' if is_caching_installed else 'warning_item'" >
+    <div tal:attributes="class python: 'normal_item' if is_caching_ok else 'warning_item'" >
         <h3 i18n:translate="">Caching</h3>
         <div tal:condition="not: is_caching_installed">
             <span i18n:translate="">
@@ -19,6 +21,16 @@
             <span i18n:translate="">
                 plone.app.caching is installed, good job!
             </span>
+            <div tal:condition="is_caching_enabled">
+                <span i18n:translate="">
+                    plone.app.caching is enabled, good job!
+                </span>
+            </div>
+            <div tal:condition="not: is_caching_enabled">
+                <span i18n:translate="">
+                    plone.app.caching is NOT enabled, fix it!
+                </span>
+            </div>
         </div>
     </div>
     <p>&nbsp;</p>
