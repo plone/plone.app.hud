@@ -28,7 +28,7 @@
             <tr>
                 <th i18n:translate="">Options</th>
                 <th i18n:translate="">ID</th>
-                <th i18n:translate="">Path</th>
+                <th i18n:translate="">Title</th>
                 <th i18n:translate="">Type</th>
                 <th i18n:translate="">Subitems</th>
                 <th i18n:translate="">Size</th>
@@ -46,10 +46,10 @@
                         <input type="submit" value="Refresh" i18n:attributes="value"/>
                     </form>
                 </td>
-                <td tal:content="root/item/id" />
                 <td>
-                    <a tal:attributes="href root/item/url" tal:content="root/item/path" />
+                    <a tal:attributes="href root/item/url" tal:content="root/item/id" />
                 </td>
+                <td tal:content="root/item/title" />
                 <td tal:content="root/item/type" />
                 <td tal:content="root/countall" />
                 <td tal:content="root/item/size" />
@@ -67,7 +67,7 @@
             <tr>
                 <th i18n:translate="">Options</th>
                 <th i18n:translate="">ID</th>
-                <th i18n:translate="">Path</th>
+                <th i18n:translate="">Title</th>
                 <th i18n:translate="">Type</th>
                 <th i18n:translate="">Subitems</th>
                 <th i18n:translate="">Size</th>
@@ -84,10 +84,10 @@
                         <input type="submit" value="Go" i18n:attributes="value"/>
                     </form>
                 </td>
-                <td tal:content="parent/item/id" />
                 <td>
-                    <a tal:attributes="href parent/item/url" tal:content="parent/item/path" />
+                    <a tal:attributes="href parent/item/url" tal:content="parent/item/id" />
                 </td>
+                <td tal:content="parent/item/title" />
                 <td tal:content="parent/item/type" />
                 <td tal:content="parent/countall" />
                 <td tal:content="parent/item/size" />

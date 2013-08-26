@@ -62,6 +62,7 @@ class NCDUPanelView(HUDPanelView):
             self.portal_id: {
                 "children": {},
                 "item": {
+                    "title": self.portal.title,
                     "url": self.portal.absolute_url(),
                     "path": self.portal_path,
                     "id": self.portal_id,
@@ -129,6 +130,7 @@ class NCDUPanelView(HUDPanelView):
 
     def get_item(self, brain):
         item = {
+            "title": brain.Title,
             "url": brain.getURL(),
             "path": brain.getPath(),
             "id": brain.getId,
