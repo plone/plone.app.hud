@@ -33,7 +33,7 @@
     </table>
 
     <table class="listing sticker" tal:repeat="group view/groups">
-        <tr>
+        <tr tal:attributes="title group">
             <th colspan="2" i18n:translate="">
                 Users in <span i18n:name="group_name" tal:replace="group"/>
             </th>
