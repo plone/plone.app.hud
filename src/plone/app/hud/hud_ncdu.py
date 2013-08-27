@@ -8,6 +8,7 @@ from plone.memoize.ram import RAMCacheAdapter
 from plone.memoize.volatile import cache
 from time import time
 from zope.ramcache import ram
+from plone.app.workflow.browser import sharing
 
 import datetime
 import locale
@@ -40,6 +41,18 @@ class NCDUPanelView(HUDPanelView):
         self.portal_id = self.portal.absolute_url_path()[1:]
         self.portal_path = self.portal.absolute_url_path()
         self.process_time = None
+        self.portal_url = api.portal.get().absolute_url()
+        self.group_url = (
+            "{url}/@@usergroup-groupmembership?"
+            "groupname={{groupid}}".format(
+                url=self.portal_url
+            )
+        )
+        self.user_url = (
+            "{url}/@@user-information?userid={{userid}}".format(
+                url=self.portal_url
+            )
+        )
 
         if "go" in self.request.form:
             self.path = self.request.form["go"]
@@ -221,6 +234,12 @@ class NCDUPanelView(HUDPanelView):
             self.page_numbers["next"] = str(self.page_number + 1)
             self.page_numbers["last"] = str(last_page)
 
+        # prepare root item
+        root_obj = self.portal.unrestrictedTraverse(
+            self.current_root['item']['path']
+        )
+        self.current_root_roles = self.get_roles(root_obj)
+
         return result[start_item:end_item + 1]
 
     def format_datetime_friendly_ago(self, date):
@@ -276,3 +295,30 @@ class NCDUPanelView(HUDPanelView):
         for wf_title, wf_id in wf_list:
             wf_dict[wf_id] = wf_title
         self.workflows = wf_dict
+
+    def get_roles(self, content_item):
+        sharing_view = sharing.SharingView(content_item, self.request)
+        entries = sharing_view.existing_role_settings()
+
+        # [{'disabled': False,
+        #   'id': 'AuthenticatedUsers',
+        #   'roles': {u'Contributor': False,
+        #             u'Editor': False,
+        #             u'Reader': False,
+        #             u'Reviewer': False},
+        #   'title': u'Logged-in users',
+        #   'type': 'group'}]
+
+        results = []
+        for entry in entries:
+            if 'group' in entry:
+                url = self.group_url.format(groupid=entry['id'])
+            else:
+                url = self.user_url.format(userid=entry['id'])
+            results += [{
+                "id": entry['id'],
+                "url": url,
+                "title": entry['title'],
+                "roles": entry['roles']
+            }]
+        return results
