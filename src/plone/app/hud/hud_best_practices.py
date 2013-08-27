@@ -70,6 +70,8 @@ class BestPracticesPanelView(HUDPanelView):
                     roles_dict[role] += 1
                 else:
                     roles_dict[role] = 1
+        del roles_dict['Authenticated']
+        del roles_dict['Member']
         return roles_dict
 
     def get_broken_klasses(self):
