@@ -45,6 +45,13 @@
                             tal:attributes="value root/item/path"/>
                         <input type="submit" value="Refresh" i18n:attributes="value"/>
                     </form>
+                    <form action="" method="POST">
+                        <input
+                            type="hidden"
+                            name="details_path"
+                            tal:attributes="value root/item/path"/>
+                        <input type="submit" value="Details" i18n:attributes="value"/>
+                    </form>
                 </td>
                 <td>
                     <a tal:attributes="href root/item/url" tal:content="root/item/id" />
@@ -55,40 +62,6 @@
                 <td tal:content="root/item/size" />
                 <td tal:content="python: view.format_datetime_friendly_ago(root['item']['modified'])" />
                 <td tal:content="root/item/state" />
-            </tr>
-        </table>
-    </div>
-    <p>&nbsp;</p>
-
-
-    <div class="tagdiv">
-        <p i18n:translate="">Sharing</p>
-        <table class="listing itemfont">
-            <tr>
-                <th i18n:translate="">ID</th>
-                <th i18n:translate="">Title</th>
-                <th i18n:translate="">Contributor</th>
-                <th i18n:translate="">Editor</th>
-                <th i18n:translate="">Reviewer</th>
-                <th i18n:translate="">Reader</th>
-            </tr>
-            <tr tal:repeat="entry view/current_root_roles">
-                <td>
-                    <a tal:attributes="href entry/url" tal:content="entry/id" />
-                </td>
-                <td tal:content="entry/title" />
-                <td>
-                    <span tal:condition="entry/roles/Contributor" tal:content="entry/roles/Contributor" />
-                </td>
-                <td>
-                    <span tal:condition="entry/roles/Editor" tal:content="entry/roles/Editor" />
-                </td>
-                <td>
-                    <span tal:condition="entry/roles/Reviewer" tal:content="entry/roles/Reviewer" />
-                </td>
-                <td>
-                    <span tal:condition="entry/roles/Reader" tal:content="entry/roles/Reader" />
-                </td>
             </tr>
         </table>
     </div>
@@ -116,6 +89,13 @@
                             name="go"
                             tal:attributes="value parent/item/path"/>
                         <input type="submit" value="Go" i18n:attributes="value"/>
+                    </form>
+                    <form action="" method="POST">
+                        <input
+                            type="hidden"
+                            name="details_path"
+                            tal:attributes="value parent/item/path"/>
+                        <input type="submit" value="Details" i18n:attributes="value"/>
                     </form>
                 </td>
                 <td>

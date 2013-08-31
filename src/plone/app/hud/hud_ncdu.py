@@ -3,12 +3,12 @@ from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
+from plone.app.workflow.browser import sharing
 from plone.hud.panel import HUDPanelView
 from plone.memoize.ram import RAMCacheAdapter
 from plone.memoize.volatile import cache
 from time import time
 from zope.ramcache import ram
-from plone.app.workflow.browser import sharing
 
 import datetime
 import locale
@@ -29,6 +29,31 @@ class NCDUPanelView(HUDPanelView):
     title = _(u"NCDU")
 
     def render(self):
+        self.portal = api.portal.get()
+        self.portal_id = self.portal.absolute_url_path()[1:]
+        self.portal_path = self.portal.absolute_url_path()
+        self.process_time = None
+        self.portal_url = self.portal.absolute_url()
+        self.group_url = (
+            "{url}/@@usergroup-groupmembership?"
+            "groupname={{groupid}}".format(
+                url=self.portal_url
+            )
+        )
+        self.user_url = (
+            "{url}/@@user-information?userid={{userid}}".format(
+                url=self.portal_url
+            )
+        )
+
+        if "details_path" in self.request.form:
+            self.path = self.request.form["details_path"]
+            self.content_item = self.portal.unrestrictedTraverse(
+                self.path
+            )
+            self.roles = self.get_roles(self.content_item)
+            return ViewPageTemplateFile('hud_details.pt')(self)
+
         if "invalidate_cache" in self.request.form:
             ncdu_cache.invalidateAll()
 
@@ -37,11 +62,6 @@ class NCDUPanelView(HUDPanelView):
         except:
             self.page_number = 1
 
-        self.portal = api.portal.get()
-        self.portal_id = self.portal.absolute_url_path()[1:]
-        self.portal_path = self.portal.absolute_url_path()
-        self.process_time = None
-        self.portal_url = api.portal.get().absolute_url()
         self.group_url = (
             "{url}/@@usergroup-groupmembership?"
             "groupname={{groupid}}".format(
@@ -233,12 +253,6 @@ class NCDUPanelView(HUDPanelView):
         else:
             self.page_numbers["next"] = str(self.page_number + 1)
             self.page_numbers["last"] = str(last_page)
-
-        # prepare root item
-        root_obj = self.portal.unrestrictedTraverse(
-            self.current_root['item']['path']
-        )
-        self.current_root_roles = self.get_roles(root_obj)
 
         return result[start_item:end_item + 1]
 
