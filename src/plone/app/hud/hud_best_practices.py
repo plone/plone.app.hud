@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
@@ -11,12 +12,22 @@ class BestPracticesPanelView(HUDPanelView):
     panel_template = ViewPageTemplateFile('hud_best_practices.pt')
     title = _(u"Best Practices")
 
+    # ZODB should be packed at least every 'PACK_DAYS' days
+    PACK_DAYS = 30
+
     def render(self):
-        portal = api.portal.get()
+        self.portal = api.portal.get()
         self.zope_writable_files = self.check_write_permissions(
-            portal.Control_Panel.getSOFTWARE_HOME()
+            self.portal.Control_Panel.getSOFTWARE_HOME()
         )
         self.check_caching()
+
+        self.days_from_oldest_undo = self.check_oldest_undo()
+        self.is_pack_time = self.days_from_oldest_undo > self.PACK_DAYS
+        self.formatted_days_from_oldest_undo = "{0:.1f}".format(
+            self.check_oldest_undo()
+        )
+
         return self.panel_template()
 
     def check_write_permissions(self, directory):
@@ -99,3 +110,16 @@ class BestPracticesPanelView(HUDPanelView):
 
         self.is_caching_ok = \
             self.is_caching_installed and self.is_caching_enabled
+
+    def check_oldest_undo(self):
+        undo_tool = api.portal.get_tool("portal_undo")
+        undo_list = undo_tool.listUndoableTransactionsFor(self.portal)
+
+        now = DateTime()
+        oldest_undo = now
+
+        for item in undo_list:
+            if item["time"] < oldest_undo:
+                oldest_undo = item["time"]
+
+        return now - oldest_undo

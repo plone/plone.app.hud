@@ -7,7 +7,35 @@
                  broken_klasses view/get_broken_klasses;
                  is_caching_ok view/is_caching_ok;
                  is_caching_installed view/is_caching_installed;
-                 is_caching_enabled view/is_caching_enabled;">
+                 is_caching_enabled view/is_caching_enabled;
+                 oldest_undo view/formatted_days_from_oldest_undo;
+                 is_pack_time view/is_pack_time;">
+
+
+    <div tal:attributes="class python: 'warning_item' if broken_klasses else 'normal_item'" >
+        <h3 i18n:translate="">Broken Klasses</h3>
+        <div tal:condition="broken_klasses">
+            <span i18n:translate="">
+                There is one or more broken classes, fix it!
+            </span>
+            <table class="listing itemfont">
+                <tr>
+                    <th i18n:translate="">Module</th>
+                    <th i18n:translate="">Class</th>
+                </tr>
+                <tr tal:repeat="klass broken_klasses">
+                    <td tal:content="klass/module" />
+                    <td tal:content="klass/name" />
+                </tr>
+            </table>
+        </div>
+        <div tal:condition="not: broken_klasses">
+            <span i18n:translate="">
+                There are no broken classes, good job!
+            </span>
+        </div>
+    </div>
+    <p>&nbsp;</p>
 
 
     <div tal:attributes="class python: 'normal_item' if is_caching_ok else 'warning_item'" >
@@ -52,26 +80,20 @@
     <p>&nbsp;</p>
 
 
-    <div tal:attributes="class python: 'warning_item' if broken_klasses else 'normal_item'" >
-        <h3 i18n:translate="">Broken Klasses</h3>
-        <div tal:condition="broken_klasses">
+    <div tal:attributes="class python: 'warning_item' if is_pack_time else 'normal_item'" >
+        <h3 i18n:translate="">Packed ZODB</h3>
+        <div tal:condition="not: is_pack_time">
             <span i18n:translate="">
-                There is one or more broken classes, fix it!
+                Time from oldest undo item is
+                <span i18n:name="oldest_undo_time" tal:replace="oldest_undo" />
+                days, good job!
             </span>
-            <table class="listing itemfont">
-                <tr>
-                    <th i18n:translate="">Module</th>
-                    <th i18n:translate="">Class</th>
-                </tr>
-                <tr tal:repeat="klass broken_klasses">
-                    <td tal:content="klass/module" />
-                    <td tal:content="klass/name" />
-                </tr>
-            </table>
         </div>
-        <div tal:condition="not: broken_klasses">
+        <div tal:condition="is_pack_time">
             <span i18n:translate="">
-                There no broken classes, good job!
+                Time from oldest undo item is
+                <span i18n:name="oldest_undo_time" tal:replace="oldest_undo" />
+                days, therefore the ZODB was not packed in that time, fix it!
             </span>
         </div>
     </div>
