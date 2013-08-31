@@ -169,14 +169,16 @@
                 <input type="submit" tal:attributes="value python: view.page_numbers['last'] + ' >>'"/>
             </form>
         </div>
+        <p>&nbsp;</p>
     </div>
 
-    <p>&nbsp;</p>
 
-    <p i18n:translate="" tal:condition="view/process_time">
-        Elapsed time is <span i18n:name="elapsed_seconds" tal:replace="view/process_time" /> seconds.
+    <div tal:condition="view/process_time">
+        <p i18n:translate="">
+            Elapsed time is <span i18n:name="elapsed_seconds" tal:replace="view/process_time" /> seconds.
+        </p>
         <br/>&nbsp;
-    </p>
+    </div>
 
 
     <form action="" method="POST">

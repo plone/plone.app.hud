@@ -59,7 +59,7 @@ class NCDUPanelView(HUDPanelView):
         else:
             self.path = self.portal_path
 
-        self.parse_workflow_titles()
+        self.workflows = self.parse_workflow_titles()
         return self.panel_template()
 
     @cache(
@@ -294,7 +294,7 @@ class NCDUPanelView(HUDPanelView):
         }
         for wf_title, wf_id in wf_list:
             wf_dict[wf_id] = wf_title
-        self.workflows = wf_dict
+        return wf_dict
 
     def get_roles(self, content_item):
         sharing_view = sharing.SharingView(content_item, self.request)

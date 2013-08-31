@@ -82,7 +82,7 @@
         <h3 i18n:translate="">Users With Roles</h3>
         <div tal:condition="not: roles_dict">
             <span i18n:translate="">
-                No user has no role, good job!
+                No user has roles, good job!
             </span>
         </div>
         <div tal:condition="roles_dict">
