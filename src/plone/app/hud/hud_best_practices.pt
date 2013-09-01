@@ -96,6 +96,11 @@
                 days, therefore the ZODB was not packed in that time, fix it!
             </span>
         </div>
+        <span i18n:translate="" class="itemfont">
+            ZODB should be packed at least every
+            <span i18n:name="pack_days" tal:replace="view/PACK_DAYS" />
+            days.
+        </span>
     </div>
     <p>&nbsp;</p>
 

@@ -31,6 +31,8 @@ class BestPracticesPanelView(HUDPanelView):
         return self.panel_template()
 
     def check_write_permissions(self, directory):
+        """Returns directories and files with write permissions."""
+
         w_entries = []
         for parentpath, dirnames, filenames in os.walk(directory):
             absparentpath = os.path.abspath(parentpath)
@@ -68,10 +70,18 @@ class BestPracticesPanelView(HUDPanelView):
         return w_entries
 
     def get_from_mail_address(self):
+        """Returns email 'from' address or None if not set."""
+
         email_from_address = api.portal.get().getProperty('email_from_address')
         return email_from_address if email_from_address else None
 
     def count_users_with_roles(self):
+        """Returns dictionary of roles as keys and user count as values.
+
+        Return example:
+        {'Manager': 1, 'Editor': 1, 'Contributor': 1, 'Reviewer': 2}
+        """
+
         roles_dict = {}
         all_users = api.user.get_users()
         for user in all_users:
@@ -81,11 +91,29 @@ class BestPracticesPanelView(HUDPanelView):
                     roles_dict[role] += 1
                 else:
                     roles_dict[role] = 1
-        del roles_dict['Authenticated']
-        del roles_dict['Member']
+
+        if 'Authenticated' in roles_dict:
+            del roles_dict['Authenticated']
+        if 'Member' in roles_dict:
+            del roles_dict['Member']
+
         return roles_dict
 
     def get_broken_klasses(self):
+        """Returns broken classes.
+
+        Return example:
+        [
+            {
+                'module': 'some.module',
+                'name': 'SomeClass'
+            },{
+                'module': 'some.other.module',
+                'name': 'SomeOtherClass'
+            },
+        ]
+        """
+
         import OFS.Uninstalled
         broken_klasses = OFS.Uninstalled.broken_klasses.keys()
         result = []
@@ -97,6 +125,12 @@ class BestPracticesPanelView(HUDPanelView):
         return result
 
     def check_caching(self):
+        """Setts is_caching_* variables, to be used in template.
+
+        is_caching_installed: is plone.app.caching installed
+        is_caching_enabled: is caching enabled in Site Setup
+        is_caching_ok: True if above two options are True
+        """
         self.installer = api.portal.get_tool('portal_quickinstaller')
 
         self.is_caching_installed = \
@@ -112,8 +146,9 @@ class BestPracticesPanelView(HUDPanelView):
             self.is_caching_installed and self.is_caching_enabled
 
     def check_oldest_undo(self):
+        """Returns number of days from oldest undo item to now."""
         undo_tool = api.portal.get_tool("portal_undo")
-        undo_list = undo_tool.listUndoableTransactionsFor(self.portal)
+        undo_list = undo_tool.listUndoableTransactionsFor(api.portal.get())
 
         now = DateTime()
         oldest_undo = now
