@@ -87,6 +87,43 @@ class NCDUPanelView(HUDPanelView):
         get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(ncdu_cache)
     )
     def _get_all_results(self):
+        """Scans the catalog and returns all items in tree like structure.
+
+        Return example:
+        {
+            'plone': {
+                'children': {
+                    'folder': {
+                        'children': {},
+                        'countall': 0,
+                        'item': {
+                            'id': 'folder',
+                            'modified': '2013-09-02T00:10:50+02:00',
+                            'path': '/plone/folder',
+                            'rid': -894254351,
+                            'size': 1.0,
+                            'state': '',
+                            'title': '',
+                            'type': u'Folder',
+                            'url': 'http://nohost/plone/folder'
+                        }
+                    }
+                },
+                'countall': 1,
+                'item': {
+                    'id': 'plone',
+                    'modified': DateTime('2013/09/02 00:10:46.869194 GMT+2'),
+                    'path': '/plone',
+                    'rid': None,
+                    'size': 1.0,
+                    'state': None,
+                    'title': u'Plone site',
+                    'type': 'PloneSite',
+                    'url': 'http://nohost/plone'
+                }
+            }
+        }
+        """
         start_time = time()
         logger.info("Scanning database ...")
 
@@ -196,6 +233,44 @@ class NCDUPanelView(HUDPanelView):
         return bytes
 
     def filter_results_by_path(self):
+        """Returns list of items in path.
+
+        Results are sorted by modification date.
+        Path is stored in self.path which is from self.request.form
+        as POST argument named 'go'.
+
+        Return example for path is '/plone/test-folder':
+        [{'countall': 2,
+          'item': {'id': 'sub-folder',
+                   'modified': '2013-09-02T01:10:01+02:00',
+                   'path': '/plone/test-folder/sub-folder',
+                   'rid': -1810078016,
+                   'size': 1.0,
+                   'state': '',
+                   'title': 'Sub Folder',
+                   'type': u'Folder',
+                   'url': 'http://nohost/plone/test-folder/sub-folder'}},
+         {'countall': 0,
+          'item': {'id': 'test-file',
+                   'modified': '2013-09-02T01:10:01+02:00',
+                   'path': '/plone/test-folder/test-file',
+                   'rid': -1810078018,
+                   'size': 0.0,
+                   'state': '',
+                   'title': 'Test File',
+                   'type': u'File',
+                   'url': 'http://nohost/plone/test-folder/test-file'}},
+         {'countall': 0,
+          'item': {'id': 'test-document',
+                   'modified': '2013-09-02T01:10:01+02:00',
+                   'path': '/plone/test-folder/test-document',
+                   'rid': -1810078020,
+                   'size': 0.0,
+                   'state': '',
+                   'title': 'Test Document',
+                   'type': u'Page',
+                   'url': 'http://nohost/plone/test-folder/test-document'}}]
+        """
         results = self._get_all_results()
         path_list = self.path.split("/")[1:]
         root_item = results[self.portal_id]
@@ -207,12 +282,29 @@ class NCDUPanelView(HUDPanelView):
         for str_id in root_item["children"]:
             item = root_item["children"][str_id]["item"]
             countall = root_item["children"][str_id]["countall"]
-            # if item is not None:
             items += [{"countall": countall, "item": item}]
         items = sorted(items, key=lambda child: child["item"]["modified"])
         return items
 
     def get_list(self):
+        """Method prepares variables for template and returns list of items.
+
+        List of items is limited to number of 'ITEMS_PER_PAGE' items.
+        Created variables to be used in template:
+            - 'clickable_path_list':
+                list of dictionaries with 'id' and 'path'
+                path buttons are going to be rendered with this,
+            - 'page_numbers' dictionary:
+                template will use this for page location information
+                Example:
+                {
+                    "first": 1,
+                    "previous": 122,
+                    "this": 123,
+                    "next": 124,
+                    "last": 200
+                }
+        """
         result = self.filter_results_by_path()
 
         path_list = self.path.split("/")[1:]
