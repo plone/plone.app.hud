@@ -9,11 +9,10 @@ import tempfile
 
 
 class TestBestPractices(IntegrationTestCase):
-    """Integration tests for best practices panel.."""
+    """Integration tests for best practices panel."""
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.app = self.layer['app']
         self.portal = self.layer['portal']
         self.best_practices = self.portal.unrestrictedTraverse(
             "@@hud_best_practices"
