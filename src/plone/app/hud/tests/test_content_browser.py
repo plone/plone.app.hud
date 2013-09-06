@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Tests for NCDU panel."""
+"""Tests for content browser panel."""
 
 from plone import api
 from plone.app.hud.testing import IntegrationTestCase
@@ -7,8 +7,8 @@ from plone.app.hud.testing import IntegrationTestCase
 import mock
 
 
-class TestNCDU(IntegrationTestCase):
-    """Integration tests for NCDU panel."""
+class TestContentBrowser(IntegrationTestCase):
+    """Integration tests for content browser panel."""
 
     def setUp(self):
         """Custom shared utility setup for tests."""
@@ -48,15 +48,15 @@ class TestNCDU(IntegrationTestCase):
         )
 
         # get view
-        self.ncdu = self.portal.unrestrictedTraverse(
-            "@@hud_ncdu"
+        self.content_browser = self.portal.unrestrictedTraverse(
+            "@@hud_content_browser"
         )
 
     def tearDown(self):
         """Clean up after each test."""
         api.content.delete(obj=self.portal['test-folder'])
 
-    def prepare_ncdu_env(self, request_form={}):
+    def prepare_content_browser_env(self, request_form={}):
         """Prepare all the variables for various tests.
 
         Also, optionally you can set 'request_form' (it must be dict type),
@@ -65,17 +65,18 @@ class TestNCDU(IntegrationTestCase):
         """
         # we do not render any templates inside integration tests
         with mock.patch(
-            'plone.app.hud.hud_ncdu.NCDUPanelView.panel_template'
+            'plone.app.hud.hud_content_browser.'
+            'ContentBrowserPanelView.panel_template'
         ):
-            self.ncdu.request.form.update(request_form)
-            self.ncdu.render()
+            self.content_browser.request.form.update(request_form)
+            self.content_browser.render()
 
     def test_get_all_results(self):
         # prepare environment
-        self.prepare_ncdu_env()
+        self.prepare_content_browser_env()
 
         # we are testing this method
-        results = self.ncdu._get_all_results()
+        results = self.content_browser._get_all_results()
 
         # test the results
         self.assertIn('plone', results)
@@ -85,10 +86,12 @@ class TestNCDU(IntegrationTestCase):
 
     def test_filter_results_by_path(self):
         # prepare environment
-        self.prepare_ncdu_env(request_form={'go': '/plone/test-folder'})
+        self.prepare_content_browser_env(
+            request_form={'go': '/plone/test-folder'}
+        )
 
         # we are testing this method
-        results = self.ncdu.filter_results_by_path()
+        results = self.content_browser.filter_results_by_path()
 
         folder_ids = ['sub-folder', 'test-document', 'test-file']
 
@@ -112,9 +115,11 @@ class TestNCDU(IntegrationTestCase):
 
     def test_get_list(self):
         # prepare environment
-        self.prepare_ncdu_env(request_form={'go': '/plone/test-folder'})
+        self.prepare_content_browser_env(
+            request_form={'go': '/plone/test-folder'}
+        )
 
         # we are testing this method
-        results = self.ncdu.get_list()
+        results = self.content_browser.get_list()
 
         # TODO

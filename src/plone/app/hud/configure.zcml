@@ -43,15 +43,15 @@
         />
 
     <permission
-        id="plone.app.hud.ncdupanel"
-        title="HUD: NCDU Panel Permission"
+        id="plone.app.hud.contentbrowserpanel"
+        title="HUD: Content Browser Panel Permission"
         />
 
     <browser:page
         for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-        name="hud_ncdu"
-        class="plone.app.hud.hud_ncdu.NCDUPanelView"
-        permission="plone.app.hud.ncdupanel"
+        name="hud_content_browser"
+        class="plone.app.hud.hud_content_browser.ContentBrowserPanelView"
+        permission="plone.app.hud.contentbrowserpanel"
         />
 
     <permission

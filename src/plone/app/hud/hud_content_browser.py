@@ -19,14 +19,14 @@ import pytz
 
 ITEMS_PER_PAGE = 50
 
-ncdu_cache = ram.RAMCache()
-ncdu_cache.update(maxAge=86400, maxEntries=10)
-logger = logging.getLogger("plone.app.hud.hud_ncdu")
+content_browser_cache = ram.RAMCache()
+content_browser_cache.update(maxAge=86400, maxEntries=10)
+logger = logging.getLogger("plone.app.hud.hud_content_browser")
 
 
-class NCDUPanelView(HUDPanelView):
-    panel_template = ViewPageTemplateFile('hud_ncdu.pt')
-    title = _(u"NCDU")
+class ContentBrowserPanelView(HUDPanelView):
+    panel_template = ViewPageTemplateFile('hud_content_browser.pt')
+    title = _(u"Content Browser")
 
     def render(self):
         self.portal = api.portal.get()
@@ -55,7 +55,7 @@ class NCDUPanelView(HUDPanelView):
             return ViewPageTemplateFile('hud_details.pt')(self)
 
         if "invalidate_cache" in self.request.form:
-            ncdu_cache.invalidateAll()
+            content_browser_cache.invalidateAll()
 
         try:
             self.page_number = int(self.request.form["page_number"])
@@ -84,7 +84,9 @@ class NCDUPanelView(HUDPanelView):
 
     @cache(
         lambda method, self: "cache_key",
-        get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(ncdu_cache)
+        get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(
+            content_browser_cache
+        )
     )
     def _get_all_results(self):
         """Scans the catalog and returns all items in tree like structure.

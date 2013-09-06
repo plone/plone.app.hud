@@ -18,16 +18,16 @@
     </configlet>
 
     <configlet
-        title="NCDU"
-        action_id="ncdu.panel"
-        appId="hud_ncdu"
+        title="Content Browser"
+        action_id="content.browser.panel"
+        appId="hud_content_browser"
         category="HUD"
         condition_expr=""
-        url_expr="string:${portal_url}/@@hud_ncdu"
+        url_expr="string:${portal_url}/@@hud_content_browser"
         icon_expr=""
         visible="True"
         i18n:attributes="title">
-            <permission>HUD: NCDU Panel Permission</permission>
+            <permission>HUD: Content Browser Panel Permission</permission>
     </configlet>
 
     <configlet
