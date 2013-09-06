@@ -45,12 +45,8 @@
                             tal:attributes="value root/item/path"/>
                         <input type="submit" value="Refresh" i18n:attributes="value"/>
                     </form>
-                    <form action="" method="POST">
-                        <input
-                            type="hidden"
-                            name="details_path"
-                            tal:attributes="value root/item/path"/>
-                        <input type="submit" value="Details" i18n:attributes="value"/>
+                    <form tal:attributes="action python:root['item']['url'] + '/@@sharing'" method="POST">
+                        <input type="submit" value="Sharing" i18n:attributes="value"/>
                     </form>
                 </td>
                 <td>
@@ -90,12 +86,8 @@
                             tal:attributes="value parent/item/path"/>
                         <input type="submit" value="Go" i18n:attributes="value"/>
                     </form>
-                    <form action="" method="POST">
-                        <input
-                            type="hidden"
-                            name="details_path"
-                            tal:attributes="value parent/item/path"/>
-                        <input type="submit" value="Details" i18n:attributes="value"/>
+                    <form tal:attributes="action python:root['item']['url'] + '/@@sharing'" method="POST">
+                        <input type="submit" value="Sharing" i18n:attributes="value"/>
                     </form>
                 </td>
                 <td>
