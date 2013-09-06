@@ -22,10 +22,10 @@ class BestPracticesPanelView(HUDPanelView):
         )
         self.check_caching()
 
-        self.days_from_oldest_undo = self.check_oldest_undo()
-        self.is_pack_time = self.days_from_oldest_undo > self.PACK_DAYS
-        self.formatted_days_from_oldest_undo = "{0:.1f}".format(
-            self.check_oldest_undo()
+        self.days_from_oldest_transaction = self.check_oldest_transaction()
+        self.is_pack_time = self.days_from_oldest_transaction > self.PACK_DAYS
+        self.formatted_days_from_oldest_transaction = "{0:.1f}".format(
+            self.check_oldest_transaction()
         )
 
         return self.panel_template()
@@ -145,8 +145,8 @@ class BestPracticesPanelView(HUDPanelView):
         self.is_caching_ok = \
             self.is_caching_installed and self.is_caching_enabled
 
-    def check_oldest_undo(self):
-        """Returns number of days from oldest undo item to now."""
+    def check_oldest_transaction(self):
+        """Returns number of days from oldest transaction to now."""
         undo_tool = api.portal.get_tool("portal_undo")
         undo_list = undo_tool.listUndoableTransactionsFor(api.portal.get())
 

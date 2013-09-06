@@ -8,7 +8,8 @@
                  is_caching_ok view/is_caching_ok;
                  is_caching_installed view/is_caching_installed;
                  is_caching_enabled view/is_caching_enabled;
-                 oldest_undo view/formatted_days_from_oldest_undo;
+                 oldest_transaction
+                    view/formatted_days_from_oldest_transaction;
                  is_pack_time view/is_pack_time;">
 
 
@@ -84,15 +85,15 @@
         <h3 i18n:translate="">Packed ZODB</h3>
         <div tal:condition="not: is_pack_time">
             <span i18n:translate="">
-                Time from oldest undo item is
-                <span i18n:name="oldest_undo_time" tal:replace="oldest_undo" />
+                Time from oldest transaction is
+                <span i18n:name="oldest_transaction_days" tal:replace="oldest_transaction" />
                 days, good job!
             </span>
         </div>
         <div tal:condition="is_pack_time">
             <span i18n:translate="">
-                Time from oldest undo item is
-                <span i18n:name="oldest_undo_time" tal:replace="oldest_undo" />
+                Time from oldest transaction is
+                <span i18n:name="oldest_transaction_days" tal:replace="oldest_transaction" />
                 days, therefore the ZODB was not packed in that time, fix it!
             </span>
         </div>

@@ -136,9 +136,9 @@ class TestBestPractices(IntegrationTestCase):
         self.assertFalse(self.best_practices.is_caching_installed)
         self.assertFalse(self.best_practices.is_caching_enabled)
 
-    def test_check_oldest_undo(self):
+    def test_check_oldest_transaction(self):
         # in testing environment this method should always return 0.0
         self.assertEqual(
             0.0,
-            self.best_practices.check_oldest_undo()
+            self.best_practices.check_oldest_transaction()
         )
