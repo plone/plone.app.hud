@@ -17,7 +17,7 @@
         <h3 i18n:translate="">Broken Klasses</h3>
         <div tal:condition="broken_klasses">
             <span i18n:translate="">
-                There is one or more broken classes, fix it!
+                There are one or more broken classes, fix it!
             </span>
             <table class="listing itemfont">
                 <tr>
@@ -83,6 +83,11 @@
 
     <div tal:attributes="class python: 'warning_item' if is_pack_time else 'normal_item'" >
         <h3 i18n:translate="">Packed ZODB</h3>
+        <span i18n:translate="" class="itemfont">
+            ZODB should be packed at least every
+            <span i18n:name="pack_days" tal:replace="view/PACK_DAYS" />
+            days.
+        </span>
         <div tal:condition="not: is_pack_time">
             <span i18n:translate="">
                 Time from oldest transaction is
@@ -97,17 +102,15 @@
                 days, therefore the ZODB was not packed in that time, fix it!
             </span>
         </div>
-        <span i18n:translate="" class="itemfont">
-            ZODB should be packed at least every
-            <span i18n:name="pack_days" tal:replace="view/PACK_DAYS" />
-            days.
-        </span>
     </div>
     <p>&nbsp;</p>
 
 
     <div tal:attributes="class python: 'warning_item' if roles_dict else 'normal_item'" >
         <h3 i18n:translate="">Users With Roles</h3>
+        <span i18n:translate="" class="itemfont">
+            Best practice is to have roles assigned to groups and users to groups.
+        </span>
         <div tal:condition="not: roles_dict">
             <span i18n:translate="">
                 No user has roles, good job!
@@ -118,9 +121,6 @@
                 Following roles are assigned directly to users, fix it!
             </span>
             <br/>
-            <span i18n:translate="" class="itemfont">
-                Best practice is to have roles assigned to groups and users to groups.
-            </span>
             <table class="listing itemfont">
                 <tr>
                     <th i18n:translate="">Role</th>
@@ -150,6 +150,9 @@
         <h3 i18n:translate="">
             Zope source files write permission
         </h3>
+        <span i18n:translate="" class="itemfont">
+            It is a security issue if Plone instance has write permission to Zope files.
+        </span>
         <div tal:condition="not: zope_writable_files">
             <span i18n:translate="">No source files are writable by Plone, good job!</span>
             <p>&nbsp;</p>
@@ -157,9 +160,6 @@
         <div tal:condition="zope_writable_files">
             <span i18n:translate="">All these files are writable by Plone, fix it!</span>
             <br/>
-            <span i18n:translate="" class="itemfont">
-                It is a security issue if Plone instance has write permission to Zope files.
-            </span>
             <p>&nbsp;</p>
 
             <div class="itemfont" tal:repeat="entry zope_writable_files">

@@ -53,18 +53,6 @@ class ContentBrowserPanelView(HUDPanelView):
         except:
             self.page_number = 1
 
-        self.group_url = (
-            "{url}/@@usergroup-groupmembership?"
-            "groupname={{groupid}}".format(
-                url=self.portal_url
-            )
-        )
-        self.user_url = (
-            "{url}/@@user-information?userid={{userid}}".format(
-                url=self.portal_url
-            )
-        )
-
         if "go" in self.request.form:
             self.path = self.request.form["go"]
         else:

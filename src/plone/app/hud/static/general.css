@@ -53,3 +53,9 @@ table.clickablepath td {
     background-color: #DDD;
     display: inline-block;
 }
+
+table.itemlisting {
+    display: inline-table;
+    margin: 5px;
+    table-layout: fixed;
+}

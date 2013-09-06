@@ -32,23 +32,16 @@
         </tr>
     </table>
 
-    <table class="listing sticker" tal:repeat="group view/groups">
-        <tr tal:attributes="title group">
-            <th colspan="2" i18n:translate="">
-                Users in <span i18n:name="group_name" tal:replace="group"/>
-            </th>
-        </tr>
+    <table class="listing itemlisting">
         <tr>
-            <td tal:content="python: view.groups[group]" />
-            <td align="right">
-                <form action="" method="POST">
-                    <input
-                        type="hidden"
-                        name="filter_by_group"
-                        tal:attributes="value group"/>
-                    <input type="submit" value="See" i18n:attributes="value"/>
-                </form>
+            <th i18n:translate="">Group</th>
+            <th i18n:translate="">Count</th>
+        </tr>
+        <tr tal:repeat="group view/groups">
+            <td>
+                <a tal:content="group" tal:attributes="href python:view.get_group_url(group)" />
             </td>
+            <td tal:content="python: view.groups[group]" />
         </tr>
     </table>
 
