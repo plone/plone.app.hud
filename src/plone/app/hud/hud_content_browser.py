@@ -3,7 +3,6 @@ from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
-from plone.app.workflow.browser import sharing
 from plone.hud.panel import HUDPanelView
 from plone.memoize.ram import RAMCacheAdapter
 from plone.memoize.volatile import cache
@@ -45,14 +44,6 @@ class ContentBrowserPanelView(HUDPanelView):
                 url=self.portal_url
             )
         )
-
-        if "details_path" in self.request.form:
-            self.path = self.request.form["details_path"]
-            self.content_item = self.portal.unrestrictedTraverse(
-                self.path
-            )
-            self.roles = self.get_roles(self.content_item)
-            return ViewPageTemplateFile('hud_details.pt')(self)
 
         if "invalidate_cache" in self.request.form:
             content_browser_cache.invalidateAll()
@@ -403,30 +394,3 @@ class ContentBrowserPanelView(HUDPanelView):
         for wf_title, wf_id in wf_list:
             wf_dict[wf_id] = wf_title
         return wf_dict
-
-    def get_roles(self, content_item):
-        sharing_view = sharing.SharingView(content_item, self.request)
-        entries = sharing_view.existing_role_settings()
-
-        # [{'disabled': False,
-        #   'id': 'AuthenticatedUsers',
-        #   'roles': {u'Contributor': False,
-        #             u'Editor': False,
-        #             u'Reader': False,
-        #             u'Reviewer': False},
-        #   'title': u'Logged-in users',
-        #   'type': 'group'}]
-
-        results = []
-        for entry in entries:
-            if 'group' in entry:
-                url = self.group_url.format(groupid=entry['id'])
-            else:
-                url = self.user_url.format(userid=entry['id'])
-            results += [{
-                "id": entry['id'],
-                "url": url,
-                "title": entry['title'],
-                "roles": entry['roles']
-            }]
-        return results

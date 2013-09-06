@@ -125,10 +125,20 @@
                 <tr>
                     <th i18n:translate="">Role</th>
                     <th i18n:translate="">Count users</th>
+                    <th i18n:translate="">Options</th>
                 </tr>
                 <tr tal:repeat="role roles_dict">
                     <td tal:content="role" />
                     <td tal:content="python: roles_dict[role]" />
+                    <td>
+                        <form action="" method="POST">
+                            <input
+                                type="hidden"
+                                name="filter_by_role"
+                                tal:attributes="value role"/>
+                            <input type="submit" value="See" i18n:attributes="value"/>
+                        </form>
+                    </td>
                 </tr>
             </table>
         </div>

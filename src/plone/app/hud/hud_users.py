@@ -3,6 +3,7 @@ from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
+from plone.app.hud import get_filtered_users
 from plone.hud.panel import HUDPanelView
 
 
@@ -25,18 +26,8 @@ class UsersPanelView(HUDPanelView):
         if "filter_by_days" in self.request.form:
             self.value = self.request.form["filter_by_days"]
             self.filter_title = self.get_day_filter_title(self.value)
-            self.users = self.get_filtered_users(by_days=self.value)
+            self.users = get_filtered_users(by_days=self.value)
             return ViewPageTemplateFile('hud_list_users.pt')(self)
-
-        elif "filter_by_group" in self.request.form:
-            value = self.request.form["filter_by_group"]
-            self.request.RESPONSE.redirect(
-                "{0}/@@usergroup-groupmembership?groupname={1}".format(
-                    api.portal.get().absolute_url(),
-                    value
-                )
-            )
-            return
 
         self.count_users = len(self.all_users)
         self.process_all(days_list=self.days_list)
@@ -88,35 +79,8 @@ class UsersPanelView(HUDPanelView):
         self.active_users = active_list
         self.groups = groups_dict
 
-    def get_filtered_users(self, by_days=None, by_group=None):
-        link = "{0}/@@user-information?userid={{user_id}}".format(
-            api.portal.get().absolute_url()
+    def get_group_url(self, groupname):
+        return "{0}/@@usergroup-groupmembership?groupname={1}".format(
+            api.portal.get().absolute_url(),
+            groupname
         )
-        users = []
-
-        for user in self.all_users:
-            add_user = False
-
-            if by_days:
-                value = int(by_days)
-                login_date = DateTime(user.getProperty("login_time"))
-                delta_days = self.now - login_date
-                if (delta_days <= value) or \
-                        (value == -1 and self.zero_date == login_date):
-                    add_user = True
-
-            if by_group:
-                user_groups = api.group.get_groups(user=user)
-                group_names = [g.getGroupName() for g in user_groups]
-                if by_group in group_names:
-                    add_user = True
-
-            if add_user:
-                users += [{
-                    "username": user.getUserName(),
-                    "fullname": user.getProperty("fullname"),
-                    "email": user.getProperty("email"),
-                    "link": link.format(user_id=user.getId())
-                }]
-
-        return users

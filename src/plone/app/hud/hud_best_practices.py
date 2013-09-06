@@ -3,6 +3,7 @@ from DateTime import DateTime
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
+from plone.app.hud import get_filtered_users
 from plone.hud.panel import HUDPanelView
 
 import os
@@ -17,6 +18,13 @@ class BestPracticesPanelView(HUDPanelView):
 
     def render(self):
         self.portal = api.portal.get()
+
+        if "filter_by_role" in self.request.form:
+            self.value = self.request.form["filter_by_role"]
+            self.filter_title = self.value
+            self.users = get_filtered_users(by_role=self.value)
+            return ViewPageTemplateFile('hud_list_users.pt')(self)
+
         self.zope_writable_files = self.check_write_permissions(
             self.portal.Control_Panel.getSOFTWARE_HOME()
         )
