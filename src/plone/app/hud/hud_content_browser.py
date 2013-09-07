@@ -44,6 +44,7 @@ class ContentBrowserPanelView(HUDPanelView):
                 url=self.portal_url
             )
         )
+        self.workflow_tool = api.portal.get_tool('portal_workflow')
 
         if "invalidate_cache" in self.request.form:
             content_browser_cache.invalidateAll()
@@ -141,6 +142,113 @@ class ContentBrowserPanelView(HUDPanelView):
         )
         return items
 
+    def _get_path(self, parent, item_id):
+        if parent:
+            return parent.get('path', []) + [item_id]
+        return [item_id]
+
+    def _get_subtree(self, root, path):
+        current_root = root
+        for p in path:
+            if p in current_root['subtree']:
+                current_root = current_root['subtree'].get(p)
+            else:
+                return None
+        return current_root
+
+    def _add_item(self, item_id, item_obj, current_root):
+        current_root['subtree'][item_id] = {
+            "subtree": {},
+            "path": self._get_path(current_root, item_id),
+            "parent": current_root,
+            "countall": 0,
+            "title": item_obj.Title(),
+            "url": item_obj.absolute_url(),
+            "type": item_obj.Type(),
+            "class": item_obj.__class__.__name__,
+            "size": self.get_kbytes(item_obj.getObjSize()),
+            "state": self.workflow_title(item_obj),
+            "modified": item_obj.modified()
+        }
+
+        self._recount_up(
+            current_root,
+            current_root['subtree'][item_id]['size']
+        )
+
+        return current_root['subtree'][item_id]
+
+    def _recount_up(self, parent, size):
+        root = parent
+        while root:
+            root['size'] += size
+            root['countall'] += 1
+            root = root['parent']
+
+    def workflow_title(self, obj):
+        try:
+            review_state = self.workflow_tool.getInfoFor(obj, 'review_state')
+            return self.workflows[str(review_state)]
+        except:
+            return ""
+
+    @cache(
+        lambda method, self: "whole_tree_cache_key",
+        get_cache=lambda fun, *args, **kwargs: RAMCacheAdapter(
+            content_browser_cache
+        )
+    )
+    def _get_whole_tree(self):
+        portal_obj = api.portal.get()
+        portal_id = portal_obj.getId()
+
+        tree = {
+            portal_id: {
+                "subtree": {},
+                "path": self._get_path(None, portal_id),
+                "parent": None,
+                "countall": 0,
+                "title": portal_obj.Title(),
+                "url": portal_obj.absolute_url(),
+                "class": portal_obj.__class__.__name__,
+                "type": portal_obj.Type(),
+                "size": self.get_kbytes(portal_obj.getObjSize()),
+                "state": self.workflow_title(portal_obj),
+                "modified": portal_obj.modified()
+            },
+        }
+        v = (portal_id, portal_obj, tree[portal_id])
+        S = [v]
+
+        start_time = time()
+        logger.info("Scanning database ...")
+
+        while S:
+            item_id, item_obj, current_root = S.pop()
+
+            for i_obj in item_obj.getChildNodes():
+                i_id = i_obj.getId()
+
+                e = self._get_subtree(
+                    tree[portal_id],
+                    self._get_path(current_root, i_id)
+                )
+                # if e already exists, continue
+                if e:
+                    continue
+                e = self._add_item(i_id, i_obj, current_root)
+                S.append((i_id, i_obj, e))
+
+        end_time = time()
+        self.process_time = "{0:.3f}".format(round(end_time - start_time, 3))
+        logger.info(
+            "End of database scan. Elapsed time is {0} seconds.".format(
+                self.process_time
+            )
+        )
+
+        return tree
+
     def add_item(self, item, items):
         item_path_list = item["path"][1:].split("/")
 
@@ -214,6 +322,60 @@ class ContentBrowserPanelView(HUDPanelView):
         return bytes
 
     def filter_results_by_path(self):
+        """Returns list of items in path.
+
+        Results are sorted by modification date.
+        Path is stored in self.path which is from self.request.form
+        as POST argument named 'go'.
+        """
+        tree = self._get_whole_tree()
+        path_list = self.path.split("/")[1:]
+        current_root = tree[self.portal_id]
+        root_id = ""
+        for str_id in path_list:
+            if str_id in current_root["subtree"]:
+                current_root = current_root["subtree"][str_id]
+                root_id = str_id
+
+        self.current_root = {
+            "countall": current_root['countall'],
+            "item": {
+                "title": current_root['title'],
+                "url": current_root['url'],
+                "path": "/" + "/".join(current_root['path']),
+                "id": root_id,
+                "type_class": "{0} / {1}".format(
+                    current_root['type'], current_root['class']
+                ),
+                "size": "{0} KB".format(current_root['size']),
+                "state": current_root['state'],
+                "modified": current_root['modified']
+            }
+        }
+
+        items = []
+        for str_id in current_root["subtree"]:
+            item = current_root["subtree"][str_id]
+            countall = item["countall"]
+            items += [{
+                "countall": countall,
+                "item": {
+                    "title": item['title'],
+                    "url": item['url'],
+                    "path": "/" + "/".join(item['path']),
+                    "id": str_id,
+                    "type_class": "{0} / {1}".format(
+                        item['type'], item['class']
+                    ),
+                    "size": "{0} KB".format(item['size']),
+                    "state": item['state'],
+                    "modified": item['modified']
+                }
+            }]
+        items = sorted(items, key=lambda child: child['item']["modified"])
+        return items
+
+    def filter_results_by_path2(self):
         """Returns list of items in path.
 
         Results are sorted by modification date.
@@ -374,8 +536,7 @@ class ContentBrowserPanelView(HUDPanelView):
                     return _(u"few seconds ago")
 
     def parse_workflow_titles(self):
-        workflow_tool = api.portal.get_tool('portal_workflow')
-        wf_list = workflow_tool.listWFStatesByTitle()
+        wf_list = self.workflow_tool.listWFStatesByTitle()
         wf_dict = {
             "": ""
         }

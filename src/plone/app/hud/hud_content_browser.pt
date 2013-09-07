@@ -29,7 +29,7 @@
                 <th i18n:translate="">Options</th>
                 <th i18n:translate="">ID</th>
                 <th i18n:translate="">Title</th>
-                <th i18n:translate="">Type</th>
+                <th i18n:translate="">Type / Class</th>
                 <th i18n:translate="">Subitems</th>
                 <th i18n:translate="">Size</th>
                 <th i18n:translate="">Modified</th>
@@ -53,7 +53,7 @@
                     <a tal:attributes="href root/item/url" tal:content="root/item/id" />
                 </td>
                 <td tal:content="root/item/title" />
-                <td tal:content="root/item/type" />
+                <td tal:content="root/item/type_class" />
                 <td tal:content="root/countall" />
                 <td tal:content="root/item/size" />
                 <td tal:content="python: view.format_datetime_friendly_ago(root['item']['modified'])" />
@@ -71,7 +71,7 @@
                 <th i18n:translate="">Options</th>
                 <th i18n:translate="">ID</th>
                 <th i18n:translate="">Title</th>
-                <th i18n:translate="">Type</th>
+                <th i18n:translate="">Type / Class</th>
                 <th i18n:translate="">Subitems</th>
                 <th i18n:translate="">Size</th>
                 <th i18n:translate="">Modified</th>
@@ -94,7 +94,7 @@
                     <a tal:attributes="href parent/item/url" tal:content="parent/item/id" />
                 </td>
                 <td tal:content="parent/item/title" />
-                <td tal:content="parent/item/type" />
+                <td tal:content="parent/item/type_class" />
                 <td tal:content="parent/countall" />
                 <td tal:content="parent/item/size" />
                 <td tal:content="python: view.format_datetime_friendly_ago(parent['item']['modified'])" />
