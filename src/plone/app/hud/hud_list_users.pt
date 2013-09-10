@@ -1,4 +1,9 @@
 
+<link rel="stylesheet" type="text/css"
+    tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+    tal:attributes="href string:${navroot}/++resource++plone.app.hud/general.css"
+    />
+
 <div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
      i18n:domain="plone.app.hud">
 
