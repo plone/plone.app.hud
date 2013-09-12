@@ -14,7 +14,7 @@ import locale
 import logging
 import math
 import pytz
-
+import re
 
 ITEMS_PER_PAGE = 50
 
@@ -194,24 +194,28 @@ class ContentBrowserPanelView(HUDPanelView):
         return item
 
     def get_kbytes(self, size_in_text):
-        ssize = str(size_in_text).upper()
+        """Parses the input string and returns kbytes as float."""
+        matched = re.match(
+            "^\D*(\d+[\.\,]?\d*)\s*([BKMGTbkmgt]{0,2}).*$",
+            size_in_text
+        )
+        if matched is None:
+            return None
+        groups = matched.groups()
 
-        # get rid of spaces all around
-        while " " in ssize:
-            ssize = ssize.replace(" ", "")
-
-        units = ["KB", "MB", "GB", "TB"]
-        level = -1
-        current_unit = ""
-        for unit in units:
-            level += 1
-            if unit in ssize:
-                current_unit = unit
-                break
-
-        fsize = locale.atof(ssize.replace(current_unit, ""))
-        bytes = fsize * 10 ** (level * 3)
-        return bytes
+        s_size = groups[0]
+        s_unit = groups[1].upper()
+        units = {
+            "": -1,
+            "B": -1,
+            "KB": 0,
+            "MB": 1,
+            "GB": 2,
+            "TB": 3
+        }
+        f_size = locale.atof(s_size)
+        kbytes = f_size * 10 ** (units[s_unit] * 3)
+        return kbytes
 
     def filter_results_by_path(self):
         """Returns list of items in path.
