@@ -1,0 +1,315 @@
+# #############################################################################
+#
+# Copyright (c) 2003-2004 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"POT-Creation-Date: Tue Aug 27 23:40:52 2013\n"
+"PO-Revision-Date: 2013-08-15 19:23+0200\n"
+"Last-Translator: Natasa <nata.cotman@gmail.com>\n"
+"Language-Team: Russian\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: plone.app.hud:/hud_best_practices.pt:112
+msgid "Zope source files write permission"
+msgstr "Доступ на запись к Зопе исходным файлам"
+
+#: plone.app.hud:/hud_best_practices.pt:116
+msgid "No source files are writable by Plone, good job!"
+msgstr "Плоне не имеет доступа на запись к исходным файлам, хорошо!"
+
+#: plone.app.hud:/hud_best_practices.pt:120
+msgid "All these files are writable by Plone, fix it!"
+msgstr "Плоне имеет доступ на запись к следующим исходным файлам, исправь это!"
+
+#: plone.app.hud:/hud_best_practices.pt:122
+msgid ""
+"It is a security issue if Plone instance has write permission to Zope files."
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:129
+msgid "All in path:"
+msgstr "Все это в пути:"
+
+#: plone.app.hud:/hud_best_practices.pt:133
+msgid "In path:"
+msgstr "В пути:"
+
+#: plone.app.hud:/hud_best_practices.pt:14
+msgid "Caching"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:16
+msgid "plone.app.caching is not installed, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:21
+msgid "plone.app.caching is installed, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:25
+msgid "plone.app.caching is enabled, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:30
+msgid "plone.app.caching is NOT enabled, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:40
+msgid "From Mail Address"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:42
+msgid "'from' email address is not configured, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:47
+msgid "'from' email address is configured, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:56
+msgid "Broken Klasses"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:58
+msgid "There is one or more broken classes, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:63
+msgid "Module"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:64
+msgid "Class"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:73
+msgid "There no broken classes, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:82
+msgid "Users With Roles"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:84
+msgid "No user has no role, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:89
+msgid "Following roles are assigned directly to users, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:93
+msgid "Best practice is to have roles assigned to groups and users to groups."
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:98
+msgid "Role"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:99 plone.app.hud:/hud_users.pt:8
+msgid "Count users"
+msgstr "Количество пользователей"
+
+#: plone.app.hud:/hud_best_practices.py:12
+msgid "Best Practices"
+msgstr ""
+
+#: plone.app.hud:/hud_list_users.pt:10 plone.app.hud:/hud_list_users.pt:33
+msgid "Back"
+msgstr "Назад"
+
+#: plone.app.hud:/hud_list_users.pt:17
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: plone.app.hud:/hud_list_users.pt:18
+msgid "Full name"
+msgstr "Полное имя"
+
+#: plone.app.hud:/hud_list_users.pt:19
+msgid "Email"
+msgstr "Электронная почта"
+
+#: plone.app.hud:/hud_list_users.pt:6
+msgid "Filtered by ${filter_title}"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:118
+msgid "Go"
+msgstr "Идти"
+
+#: plone.app.hud:/hud_ncdu.pt:177
+msgid "Elapsed time is ${elapsed_seconds} seconds. <br />&nbsp;"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:184
+msgid "Invalidate Cache"
+msgstr "Аннулировай кэш."
+
+#: plone.app.hud:/hud_ncdu.pt:26
+msgid "Container"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:29 plone.app.hud:/hud_ncdu.pt:102
+msgid "Options"
+msgstr "Опции"
+
+#: plone.app.hud:/hud_ncdu.pt:30 plone.app.hud:/hud_ncdu.pt:68
+#: plone.app.hud:/hud_ncdu.pt:103
+msgid "ID"
+msgstr "Идентификация"
+
+#: plone.app.hud:/hud_ncdu.pt:31 plone.app.hud:/hud_ncdu.pt:69
+#: plone.app.hud:/hud_ncdu.pt:104
+msgid "Title"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:32 plone.app.hud:/hud_ncdu.pt:105
+msgid "Type"
+msgstr "Тип"
+
+#: plone.app.hud:/hud_ncdu.pt:33 plone.app.hud:/hud_ncdu.pt:106
+msgid "Subitems"
+msgstr "Подпредмет"
+
+#: plone.app.hud:/hud_ncdu.pt:34 plone.app.hud:/hud_ncdu.pt:107
+msgid "Size"
+msgstr "Размер"
+
+#: plone.app.hud:/hud_ncdu.pt:35 plone.app.hud:/hud_ncdu.pt:108
+msgid "Modified"
+msgstr "Видоизменение"
+
+#: plone.app.hud:/hud_ncdu.pt:36 plone.app.hud:/hud_ncdu.pt:109
+msgid "State"
+msgstr "Состояние"
+
+#: plone.app.hud:/hud_ncdu.pt:46
+msgid "Refresh"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:65
+msgid "Sharing"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:70
+msgid "Contributor"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:71
+msgid "Editor"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:72
+msgid "Reviewer"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:73
+msgid "Reader"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.pt:9
+msgid "Path"
+msgstr "Путь"
+
+#: plone.app.hud:/hud_ncdu.pt:99
+msgid "Contents"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.py:272
+msgid "moment ago"
+msgstr "Мгновение назад"
+
+#: plone.app.hud:/hud_ncdu.py:281
+msgid "hours"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.py:281 plone.app.hud:/hud_ncdu.py:285
+msgid "minutes ago"
+msgstr ""
+
+#: plone.app.hud:/hud_ncdu.py:287
+msgid "few seconds ago"
+msgstr "несколько секунд назад"
+
+#: plone.app.hud:/hud_ncdu.py:29
+msgid "NCDU"
+msgstr ""
+
+#: plone.app.hud:/hud_security_advisories.py:26
+msgid "Security Advisories"
+msgstr ""
+
+#: plone.app.hud:/hud_users.pt:18
+msgid "Active: ${active_filter_title}"
+msgstr ""
+
+#: plone.app.hud:/hud_users.pt:29 plone.app.hud:/hud_users.pt:49
+msgid "See"
+msgstr "Посмотри"
+
+#: plone.app.hud:/hud_users.pt:38
+msgid "Users in ${group_name}"
+msgstr ""
+
+#: plone.app.hud:/hud_users.py:11
+msgid "Users"
+msgstr ""
+
+#: plone.app.hud:/hud_users.py:18
+msgid "Last day"
+msgstr "Последний день"
+
+#: plone.app.hud:/hud_users.py:19
+msgid "Last week"
+msgstr "На прошлой неделе"
+
+#: plone.app.hud:/hud_users.py:20
+msgid "Last month"
+msgstr "В прошлом месяце"
+
+#: plone.app.hud:/hud_users.py:21
+msgid "Last year"
+msgstr "В прошлом году"
+
+#: plone.app.hud:/hud_users.py:22
+msgid "Never"
+msgstr "Никогда"
+
+#~ msgid "Elapsed time is ${DYNAMIC_CONTENT} seconds."
+#~ msgstr "Истекшее время составляет ${DYNAMIC_CONTENT} секунд."
+
+#~ msgid "{0} hours {1} minutes ago"
+#~ msgstr "{0} ч {1} мин назад"
+
+#~ msgid "{0} minutes ago"
+#~ msgstr "{0} мин назад"
+
+#~ msgid "Active: ${DYNAMIC_CONTENT}"
+#~ msgstr "Активное: ${DYNAMIC_CONTENT}"
+
+#~ msgid "Users in ${DYNAMIC_CONTENT}"
+#~ msgstr "Пользователей в ${DYNAMIC_CONTENT}"
+
+#~ msgid "Filtered by {0} days"
+#~ msgstr "Фильтрация по {0} дням"
+
+#~ msgid "Filtered by {0} group"
+#~ msgstr "Фильтрация по {0}"
