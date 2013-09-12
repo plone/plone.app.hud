@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 """Tests for content browser panel."""
 
+from DateTime import DateTime
 from plone import api
+from plone.app.hud.hud_content_browser import ContentBrowserPanelView
 from plone.app.hud.testing import IntegrationTestCase
 
 import mock
+import unittest2 as unittest
 
 
 class TestContentBrowser(IntegrationTestCase):
@@ -51,6 +54,7 @@ class TestContentBrowser(IntegrationTestCase):
         self.content_browser = self.portal.unrestrictedTraverse(
             "@@hud_content_browser"
         )
+        self.content_browser.portal = self.portal
 
     def tearDown(self):
         """Clean up after each test."""
@@ -92,10 +96,10 @@ class TestContentBrowser(IntegrationTestCase):
 
         # we are testing this method
         results = self.content_browser.filter_results_by_path()
-
-        folder_ids = ['sub-folder', 'test-document', 'test-file']
+        current_root = self.content_browser.current_root
 
         # test the results
+        folder_ids = ['sub-folder', 'test-document', 'test-file']
         self.assertEqual(
             3,
             len(results)
@@ -113,6 +117,16 @@ class TestContentBrowser(IntegrationTestCase):
             folder_ids
         )
 
+        # test the current root object
+        self.assertEqual(
+            current_root["item"]["title"],
+            "Test Folder"
+        )
+        self.assertEqual(
+            current_root["countall"],
+            5
+        )
+
     def test_get_list(self):
         # prepare environment
         self.prepare_content_browser_env(
@@ -122,4 +136,83 @@ class TestContentBrowser(IntegrationTestCase):
         # we are testing this method
         results = self.content_browser.get_list()
 
-        # TODO
+        # test the results
+        self.assertEqual(
+            3,
+            len(results)
+        )
+
+        # test clickable path list
+        self.assertEqual(
+            self.content_browser.clickable_path_list,
+            [
+                {'path': '/plone', 'id': 'plone'},
+                {'path': '/plone/test-folder', 'id': 'test-folder'}
+            ]
+        )
+
+        # test page numbers object
+        self.assertEqual(
+            self.content_browser.page_numbers,
+            {
+                'this': '1',
+                'next': None,
+                'previous': None,
+                'last': None,
+                'first': None
+            }
+        )
+
+
+class TestContentBrowserUnitTests(unittest.TestCase):
+
+    def setUp(self):
+        self.content_browser = ContentBrowserPanelView(None, None)
+        self.content_browser.portal = mock.Mock()
+
+    def test_get_kbytes(self):
+        self.assertEqual(
+            self.content_browser.get_kbytes("3"),
+            0.003
+        )
+        self.assertEqual(
+            self.content_browser.get_kbytes("3B"),
+            0.003
+        )
+        self.assertEqual(
+            self.content_browser.get_kbytes("3 KB"),
+            3.0
+        )
+        self.assertEqual(
+            self.content_browser.get_kbytes("    3    MB   "),
+            3000.0
+        )
+        self.assertEqual(
+            self.content_browser.get_kbytes("garbage3GBgarbage"),
+            3000000.0
+        )
+        self.assertEqual(
+            self.content_browser.get_kbytes("garbage3  TBgarbage"),
+            3000000000.0
+        )
+
+    def test_format_datetime_friendly_ago(self):
+        dt_now = DateTime()
+
+        # test now
+        self.assertEqual(
+            self.content_browser.format_datetime_friendly_ago(dt_now),
+            u"few seconds ago"
+        )
+
+        # test future
+        self.assertEqual(
+            self.content_browser.format_datetime_friendly_ago(dt_now + 120),
+            u"moment ago"
+        )
+
+        # test past
+        self.content_browser.format_datetime_friendly_ago(dt_now - 120)
+        self.assertTrue(
+            self.content_browser.portal.toLocalizedTime.called
+        )
