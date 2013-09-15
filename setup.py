@@ -23,7 +23,7 @@ setup(
     classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
-        "Development Status :: 1 - Planning",
+        "Development Status :: 3 - Alpha",
     ],
     keywords='Plone HUD Panels',
     author='Plone Foundation',
