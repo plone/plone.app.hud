@@ -5,57 +5,21 @@ plone.app.hud
 This Plone add-on contains several HUD Panels:
 
 * Best Practices - Plone best practices panel.
-* NCDU - Similar informational output as NCDU (NCurses Disk Usage) for Plone site overview.
-* Users - Basic users information.
+* Content Browser - browse through catalog.
+* Security Advisories - RSS reader for `securiry advisories <http://plone.org/products/plone/security/advisories/>`_ directly inside Plone.
+* Users - basic users information.
 
 
 It uses `plone.hud framework <https://github.com/plone/plone.hud>`_
 
 
-WARNING:
-This add-on is under heavy development,
-it is not recommended to be used in production yet (it will be soon ready!).
-BUT, please do try it and report back!
-
-
 * `Source code @ GitHub <https://github.com/plone/plone.app.hud>`_
-
-
-* TO BE DONE:
 * `Releases @ PyPI <http://pypi.python.org/pypi/plone.app.hud>`_
-* `Documentation @ ReadTheDocs <http://ploneapphud.readthedocs.org>`_
 * `Continuous Integration @ Travis-CI <http://travis-ci.org/plone/plone.app.hud>`_
 
 
 Installation
 ============
-
-For now
--------
-
-Add to your Plone ``buildout.cfg``::
-
-    ...
-    eggs +=
-        ...
-        plone.hud
-        plone.app.hud
-    ...
-    extensions += mr.developer
-    sources = sources
-
-    auto-checkout =
-        plone.hud
-        plone.app.hud
-
-    [sources]
-    plone.hud = git git://github.com/plone/plone.hud.git
-    plone.app.hud = git git://github.com/plone/plone.app.hud.git
-    ...
-
-
-When the egg will be available
-------------------------------
 
 To install `plone.app.hud` you simply add ``plone.app.hud``
 to the list of eggs in your buildout.
@@ -89,4 +53,28 @@ How to make your own panels?
 ============================
 
 * `collective.examples.hud @ GitHub <https://github.com/collective/collective.examples.hud>`_
+
+
+Development
+===========
+
+Add to your Plone ``buildout.cfg``::
+
+    ...
+    eggs +=
+        ...
+        plone.hud
+        plone.app.hud
+    ...
+    extensions += mr.developer
+    sources = sources
+
+    auto-checkout =
+        plone.hud
+        plone.app.hud
+
+    [sources]
+    plone.hud = git git://github.com/plone/plone.hud.git
+    plone.app.hud = git git://github.com/plone/plone.app.hud.git
+    ...
 
