@@ -29,7 +29,7 @@ setup(
     author='Plone Foundation',
     author_email='plone-developers@lists.sourceforge.net',
     url='http://pypi.python.org/pypi/plone.app.hud',
-    license='BSD',
+    license='GPL version 2',
     packages=find_packages('src', exclude=['ez_setup']),
     namespace_packages=['plone', 'plone.app'],
     package_dir={'': 'src'},
