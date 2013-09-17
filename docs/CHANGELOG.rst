@@ -8,5 +8,5 @@ Changelog
 - Initial release.
   [Matej Cotman]
 
-- Translation sl&es
+- Translations sl, es and ru
   [Natasa Cotman]
