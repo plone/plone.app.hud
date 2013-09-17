@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Sun Aug 18 00:19:35 2013\n"
+"POT-Creation-Date: Thu Sep 12 20:09:06 2013\n"
 "PO-Revision-Date: 2013-08-11 04:08+0200\n"
 "Last-Translator: Natasa <nata.cotman@gmail.com>\n"
 "Language-Team: Slovenian\n"
@@ -26,25 +26,224 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
 "%100==4 ? 2 : 3);\n"
 
-#: plone.app.hud:/hud_best_practices.pt:11
+#: plone.app.hud:/hud_best_practices.pt:101
+msgid "Time from oldest transaction is ${oldest_transaction_days} days, therefore the ZODB was not packed in that time, fix it!"
+msgstr "Najstarejša transakcija je stara ${oldest_transaction_days} dni, zato ZODB medtem časom ni bil pakiran. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:110
+msgid "Users With Roles"
+msgstr "Uporabniki z vlogami"
+
+#: plone.app.hud:/hud_best_practices.pt:111
+msgid "Best practice is to have roles assigned to groups and users to groups."
+msgstr "Najboljše je, da so vloge dodeljene skupinam in uporabniki skupinam."
+
+#: plone.app.hud:/hud_best_practices.pt:115
+msgid "No user has roles, good job!"
+msgstr "Noben uporabnik nima vloge. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.pt:120
+msgid "Following roles are assigned directly to users, fix it!"
+msgstr "Naslednje vloge so dodeljene izrecno uporabnikom. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:126
+msgid "Role"
+msgstr "Vloga"
+
+#: plone.app.hud:/hud_best_practices.pt:127 plone.app.hud:/hud_users.pt:8
+msgid "Count users"
+msgstr "Število uporabnikov"
+
+#: plone.app.hud:/hud_best_practices.pt:139 plone.app.hud:/hud_users.pt:29
+msgid "See"
+msgstr "Poglej"
+
+#: plone.app.hud:/hud_best_practices.pt:150
+msgid "Zope source files write permission"
+msgstr "Zapisljivo dovoljenje Zope izvornih datotek"
+
+#: plone.app.hud:/hud_best_practices.pt:153
+msgid "It is a security issue if Plone instance has write permission to Zope files."
+msgstr "Če ima Plone instanca zapisljiv dostop do Zope izvornih datotek, gre za varnostni problem."
+
+#: plone.app.hud:/hud_best_practices.pt:157
 msgid "No source files are writable by Plone, good job!"
 msgstr "Plone nima zapisljivega dostopa do izvornih datotek. Odlično!"
 
-#: plone.app.hud:/hud_best_practices.pt:16
+#: plone.app.hud:/hud_best_practices.pt:161
 msgid "All these files are writable by Plone, fix it!"
-msgstr "Plone ima zapisljiv dostop do sledečih izvornih datotek, popravi!"
+msgstr "Plone ima zapisljiv dostop do sledečih izvornih datotek. Popravi!"
 
-#: plone.app.hud:/hud_best_practices.pt:21
+#: plone.app.hud:/hud_best_practices.pt:167
 msgid "All in path:"
 msgstr "Vse v:"
 
-#: plone.app.hud:/hud_best_practices.pt:25
+#: plone.app.hud:/hud_best_practices.pt:17
+msgid "Broken Klasses"
+msgstr "Pokvarjeni razredi"
+
+#: plone.app.hud:/hud_best_practices.pt:171
 msgid "In path:"
 msgstr "Znotraj:"
 
-#: plone.app.hud:/hud_best_practices.pt:6
-msgid "Zope source files write permission"
-msgstr "Zapisljivo dovoljenje Zope izvornih datotek"
+#: plone.app.hud:/hud_best_practices.pt:19
+msgid "There are one or more broken classes, fix it!"
+msgstr "Eden ali več razredov je pokvarjenih. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:24
+msgid "Module"
+msgstr "Modul"
+
+#: plone.app.hud:/hud_best_practices.pt:25
+msgid "Class"
+msgstr "Razred"
+
+#: plone.app.hud:/hud_best_practices.pt:34
+msgid "There are no broken classes, good job!"
+msgstr "Ni pokvarjenih razredov. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.pt:43
+msgid "Caching"
+msgstr "Pomnilnik"
+
+#: plone.app.hud:/hud_best_practices.pt:45
+msgid "plone.app.caching is not installed, fix it!"
+msgstr "plone.app.caching ni nameščen. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:50
+msgid "plone.app.caching is installed, good job!"
+msgstr "plone.app.caching je nameščen. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.pt:54
+msgid "plone.app.caching is enabled, good job!"
+msgstr "plone.app.caching je omogočen. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.pt:59
+msgid "plone.app.caching is NOT enabled, fix it!"
+msgstr "plone.app.caching je neomogočen. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:69
+msgid "From Mail Address"
+msgstr "Odhodni elektronski naslov"
+
+#: plone.app.hud:/hud_best_practices.pt:71
+msgid "'from' email address is not configured, fix it!"
+msgstr "Odhodni elektronski naslov ni nastavljen. Popravi!"
+
+#: plone.app.hud:/hud_best_practices.pt:76
+msgid "'from' email address is configured, good job!"
+msgstr "Odhodni elektronski naslov je nastavljen. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.pt:85
+msgid "Packed ZODB"
+msgstr "Pakiran ZODB"
+
+#: plone.app.hud:/hud_best_practices.pt:88
+msgid "ZODB should be packed at least every ${pack_days} days."
+msgstr "ZODB naj bi bil pakiran vsaj vsake ${pack_days} dni"
+
+#: plone.app.hud:/hud_best_practices.pt:94
+msgid "Time from oldest transaction is ${oldest_transaction_days} days, good job!"
+msgstr "Čas najstarejše transakcije je ${oldest_transaction_days} dni. Odlično!"
+
+#: plone.app.hud:/hud_best_practices.py:14
+msgid "Best Practices"
+msgstr "Priporočeni načini"
+
+#: plone.app.hud:/hud_content_browser.pt:150
+msgid "Elapsed time is ${elapsed_seconds} seconds."
+msgstr "Pretečeni čas je ${elapsed_seconds} sekund."
+
+#: plone.app.hud:/hud_content_browser.pt:158
+msgid "Invalidate Cache"
+msgstr "Razveljavi pomnilnik"
+
+#: plone.app.hud:/hud_content_browser.pt:26
+msgid "Container"
+msgstr "Element"
+
+#: plone.app.hud:/hud_content_browser.pt:29
+#: plone.app.hud:/hud_content_browser.pt:71
+#: plone.app.hud:/hud_best_practices.pt:128
+msgid "Options"
+msgstr "Možnosti"
+
+#: plone.app.hud:/hud_content_browser.pt:30
+#: plone.app.hud:/hud_content_browser.pt:72
+msgid "ID"
+msgstr "ID"
+
+#: plone.app.hud:/hud_content_browser.pt:31
+#: plone.app.hud:/hud_content_browser.pt:73
+msgid "Title"
+msgstr "Naslov"
+
+#: plone.app.hud:/hud_content_browser.pt:32
+#: plone.app.hud:/hud_content_browser.pt:74
+msgid "Type"
+msgstr "Vrsta"
+
+#: plone.app.hud:/hud_content_browser.pt:33
+#: plone.app.hud:/hud_content_browser.pt:75
+msgid "Subitems"
+msgstr "Podelementi"
+
+#: plone.app.hud:/hud_content_browser.pt:34
+#: plone.app.hud:/hud_content_browser.pt:76
+msgid "Size"
+msgstr "Velikost"
+
+#: plone.app.hud:/hud_content_browser.pt:35
+#: plone.app.hud:/hud_content_browser.pt:77
+msgid "Modified"
+msgstr "Spremenjeno"
+
+#: plone.app.hud:/hud_content_browser.pt:36
+#: plone.app.hud:/hud_content_browser.pt:78
+msgid "State"
+msgstr "Stanje"
+
+#: plone.app.hud:/hud_content_browser.pt:46
+msgid "Refresh"
+msgstr "Osveži"
+
+#: plone.app.hud:/hud_content_browser.pt:49
+#: plone.app.hud:/hud_content_browser.pt:90
+msgid "Sharing"
+msgstr "Skupna raba"
+
+#: plone.app.hud:/hud_content_browser.pt:68
+msgid "Contents"
+msgstr "Vsebina"
+
+#: plone.app.hud:/hud_content_browser.pt:87
+msgid "Go"
+msgstr "Pojdi"
+
+#: plone.app.hud:/hud_content_browser.pt:9
+msgid "Path"
+msgstr "Pot"
+
+#: plone.app.hud:/hud_content_browser.py:28
+msgid "Content Browser"
+msgstr "Brskalnik vsebin"
+
+#: plone.app.hud:/hud_content_browser.py:363
+msgid "moment ago"
+msgstr "trenutek nazaj"
+
+#: plone.app.hud:/hud_content_browser.py:372
+msgid "hours"
+msgstr "ur"
+
+#: plone.app.hud:/hud_content_browser.py:372
+#: plone.app.hud:/hud_content_browser.py:376
+msgid "minutes ago"
+msgstr "minut nazaj"
+
+#: plone.app.hud:/hud_content_browser.py:378
+msgid "few seconds ago"
+msgstr "nekaj sekund nazaj"
 
 #: plone.app.hud:/hud_list_users.pt:10 plone.app.hud:/hud_list_users.pt:33
 msgid "Back"
@@ -52,7 +251,7 @@ msgstr "Nazaj"
 
 #: plone.app.hud:/hud_list_users.pt:17
 msgid "Username"
-msgstr "Ime uporabnika"
+msgstr "Uporabnik"
 
 #: plone.app.hud:/hud_list_users.pt:18
 msgid "Full name"
@@ -64,125 +263,45 @@ msgstr "Elektronska pošta"
 
 #: plone.app.hud:/hud_list_users.pt:6
 msgid "Filtered by ${filter_title}"
-msgstr ""
+msgstr "Filtrirano po ${filter_title}"
 
-#: plone.app.hud:/hud_ncdu.pt:122
-msgid "Elapsed time is ${elapsed_seconds} seconds."
-msgstr "Preteklo je ${elapsed_seconds} sekund."
-
-#: plone.app.hud:/hud_ncdu.pt:129
-msgid "Invalidate Cache"
-msgstr "Razveljavi pomnilnik"
-
-#: plone.app.hud:/hud_ncdu.pt:33
-msgid "Refresh"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:48
-msgid "Options"
-msgstr "Možnosti"
-
-#: plone.app.hud:/hud_ncdu.pt:49
-msgid "ID"
-msgstr "ID"
-
-#: plone.app.hud:/hud_ncdu.pt:51
-msgid "Type"
-msgstr "Vrsta"
-
-#: plone.app.hud:/hud_ncdu.pt:52
-msgid "Subitems"
-msgstr "Podelementi"
-
-#: plone.app.hud:/hud_ncdu.pt:53
-msgid "Size"
-msgstr "Velikost"
-
-#: plone.app.hud:/hud_ncdu.pt:54
-msgid "Modified"
-msgstr "Spremenjeno"
-
-#: plone.app.hud:/hud_ncdu.pt:55
-msgid "State"
-msgstr "Status"
-
-#: plone.app.hud:/hud_ncdu.pt:64
-msgid "Go"
-msgstr "Pojdi"
-
-#: plone.app.hud:/hud_ncdu.pt:9 plone.app.hud:/hud_ncdu.pt:50
-msgid "Path"
-msgstr "Pot"
-
-#: plone.app.hud:/hud_ncdu.py:246
-msgid "moment ago"
-msgstr "trenutek nazaj"
-
-#: plone.app.hud:/hud_ncdu.py:255
-msgid "hours"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:255 plone.app.hud:/hud_ncdu.py:259
-msgid "minutes ago"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:261
-msgid "few seconds ago"
-msgstr "nekaj sekund nazaj"
+#: plone.app.hud:/hud_security_advisories.py:26
+msgid "Security Advisories"
+msgstr "Varnostni napotki"
 
 #: plone.app.hud:/hud_users.pt:18
 msgid "Active: ${active_filter_title}"
-msgstr ""
+msgstr "Aktivno: ${active_filter_title}"
 
-#: plone.app.hud:/hud_users.pt:29 plone.app.hud:/hud_users.pt:49
-msgid "See"
-msgstr "Poglej"
+#: plone.app.hud:/hud_users.pt:37
+msgid "Group"
+msgstr "Skupina"
 
 #: plone.app.hud:/hud_users.pt:38
-msgid "Users in ${group_name}"
-msgstr ""
+msgid "Count"
+msgstr "Število"
 
-#: plone.app.hud:/hud_users.pt:8
-msgid "Count users"
-msgstr "Število uporabnikov"
+#: plone.app.hud:/hud_users.py:12
+msgid "Users"
+msgstr "Uporabniki"
 
-#: plone.app.hud:/hud_users.py:17
+#: plone.app.hud:/hud_users.py:19
 msgid "Last day"
 msgstr "Zadnji dan"
 
-#: plone.app.hud:/hud_users.py:18
+#: plone.app.hud:/hud_users.py:20
 msgid "Last week"
 msgstr "Zadnji teden"
 
-#: plone.app.hud:/hud_users.py:19
+#: plone.app.hud:/hud_users.py:21
 msgid "Last month"
 msgstr "Zadnji mesec"
 
-#: plone.app.hud:/hud_users.py:20
+#: plone.app.hud:/hud_users.py:22
 msgid "Last year"
 msgstr "Zadnje leto"
 
-#: plone.app.hud:/hud_users.py:21
+#: plone.app.hud:/hud_users.py:23
 msgid "Never"
 msgstr "Nikoli"
 
-#~ msgid "{0} hours {1} minutes ago"
-#~ msgstr "{0} hours {1} minut nazaj"
-
-#~ msgid "{0} minutes ago"
-#~ msgstr "{0} minut nazaj"
-
-#~ msgid "Active: ${DYNAMIC_CONTENT}"
-#~ msgstr "Aktivno: ${DYNAMIC_CONTENT}"
-
-#~ msgid "Users in ${DYNAMIC_CONTENT}"
-#~ msgstr "Uporabniki v ${DYNAMIC_CONTENT}"
-
-#~ msgid "Filtered by {0} days"
-#~ msgstr "Filtrirano glede na {0} dni"
-
-#~ msgid "Elapsed time is ${DYNAMIC_CONTENT} seconds."
-#~ msgstr "Preteklo je ${DYNAMIC_CONTENT} sekund."
-
-#~ msgid "Filtered by {0} group"
-#~ msgstr "Filtrirano glede na {0} skupino"
