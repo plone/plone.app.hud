@@ -4,6 +4,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from plone.app.hud import _
 from plone.app.hud import get_filtered_users
+from plone.app.hud import is_zero_DT
 from plone.hud.panel import HUDPanelView
 
 
@@ -13,7 +14,6 @@ class UsersPanelView(HUDPanelView):
 
     def render(self):
         self.all_users = api.user.get_users()
-        self.zero_date = DateTime('2000/01/01 00:00:00 GMT+1')
         self.now = DateTime()
         self.days_list = [
             (_(u"Last day"), 1),
@@ -67,7 +67,7 @@ class UsersPanelView(HUDPanelView):
             for days_dict in active_list:
                 if delta_days <= days_dict["value"]:
                     days_dict["user_count"] += 1
-                if days == -1 and self.zero_date == login_date:
+                if days == -1 and is_zero_DT(login_date):
                     days_dict["user_count"] += 1
                     break
 
