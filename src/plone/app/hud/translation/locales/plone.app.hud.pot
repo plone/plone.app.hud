@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
-"POT-Creation-Date: Sun Aug 18 00:19:35 2013\n"
+"POT-Creation-Date: Thu Sep 12 20:09:06 2013\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope-dev@zope.org>\n"
@@ -23,24 +23,225 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: plone.app.hud:/hud_best_practices.pt:11
+#: plone.app.hud:/hud_best_practices.pt:101
+msgid "Time from oldest transaction is ${oldest_transaction_days} days, therefore the ZODB was not packed in that time, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:110
+msgid "Users With Roles"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:111
+msgid "Best practice is to have roles assigned to groups and users to groups."
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:115
+msgid "No user has roles, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:120
+msgid "Following roles are assigned directly to users, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:126
+msgid "Role"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:127
+#: plone.app.hud:/hud_users.pt:8
+msgid "Count users"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:139
+#: plone.app.hud:/hud_users.pt:29
+msgid "See"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:150
+msgid "Zope source files write permission"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:153
+msgid "It is a security issue if Plone instance has write permission to Zope files."
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:157
 msgid "No source files are writable by Plone, good job!"
 msgstr ""
 
-#: plone.app.hud:/hud_best_practices.pt:16
+#: plone.app.hud:/hud_best_practices.pt:161
 msgid "All these files are writable by Plone, fix it!"
 msgstr ""
 
-#: plone.app.hud:/hud_best_practices.pt:21
+#: plone.app.hud:/hud_best_practices.pt:167
 msgid "All in path:"
 msgstr ""
 
-#: plone.app.hud:/hud_best_practices.pt:25
+#: plone.app.hud:/hud_best_practices.pt:17
+msgid "Broken Klasses"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:171
 msgid "In path:"
 msgstr ""
 
-#: plone.app.hud:/hud_best_practices.pt:6
-msgid "Zope source files write permission"
+#: plone.app.hud:/hud_best_practices.pt:19
+msgid "There are one or more broken classes, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:24
+msgid "Module"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:25
+msgid "Class"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:34
+msgid "There are no broken classes, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:43
+msgid "Caching"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:45
+msgid "plone.app.caching is not installed, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:50
+msgid "plone.app.caching is installed, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:54
+msgid "plone.app.caching is enabled, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:59
+msgid "plone.app.caching is NOT enabled, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:69
+msgid "From Mail Address"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:71
+msgid "'from' email address is not configured, fix it!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:76
+msgid "'from' email address is configured, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:85
+msgid "Packed ZODB"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:88
+msgid "ZODB should be packed at least every ${pack_days} days."
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.pt:94
+msgid "Time from oldest transaction is ${oldest_transaction_days} days, good job!"
+msgstr ""
+
+#: plone.app.hud:/hud_best_practices.py:14
+msgid "Best Practices"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:150
+msgid "Elapsed time is ${elapsed_seconds} seconds."
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:158
+msgid "Invalidate Cache"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:26
+msgid "Container"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:29
+#: plone.app.hud:/hud_content_browser.pt:71
+#: plone.app.hud:/hud_best_practices.pt:128
+msgid "Options"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:30
+#: plone.app.hud:/hud_content_browser.pt:72
+msgid "ID"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:31
+#: plone.app.hud:/hud_content_browser.pt:73
+msgid "Title"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:32
+#: plone.app.hud:/hud_content_browser.pt:74
+msgid "Type"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:33
+#: plone.app.hud:/hud_content_browser.pt:75
+msgid "Subitems"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:34
+#: plone.app.hud:/hud_content_browser.pt:76
+msgid "Size"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:35
+#: plone.app.hud:/hud_content_browser.pt:77
+msgid "Modified"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:36
+#: plone.app.hud:/hud_content_browser.pt:78
+msgid "State"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:46
+msgid "Refresh"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:49
+#: plone.app.hud:/hud_content_browser.pt:90
+msgid "Sharing"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:68
+msgid "Contents"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:87
+msgid "Go"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.pt:9
+msgid "Path"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.py:28
+msgid "Content Browser"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.py:363
+msgid "moment ago"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.py:372
+msgid "hours"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.py:372
+#: plone.app.hud:/hud_content_browser.py:376
+msgid "minutes ago"
+msgstr ""
+
+#: plone.app.hud:/hud_content_browser.py:378
+msgid "few seconds ago"
 msgstr ""
 
 #: plone.app.hud:/hud_list_users.pt:10
@@ -64,106 +265,43 @@ msgstr ""
 msgid "Filtered by ${filter_title}"
 msgstr ""
 
-#: plone.app.hud:/hud_ncdu.pt:122
-msgid "Elapsed time is ${elapsed_seconds} seconds."
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:129
-msgid "Invalidate Cache"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:33
-msgid "Refresh"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:48
-msgid "Options"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:49
-msgid "ID"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:51
-msgid "Type"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:52
-msgid "Subitems"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:53
-msgid "Size"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:54
-msgid "Modified"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:55
-msgid "State"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:64
-msgid "Go"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.pt:9
-#: plone.app.hud:/hud_ncdu.pt:50
-msgid "Path"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:246
-msgid "moment ago"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:255
-msgid "hours"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:255
-#: plone.app.hud:/hud_ncdu.py:259
-msgid "minutes ago"
-msgstr ""
-
-#: plone.app.hud:/hud_ncdu.py:261
-msgid "few seconds ago"
+#: plone.app.hud:/hud_security_advisories.py:26
+msgid "Security Advisories"
 msgstr ""
 
 #: plone.app.hud:/hud_users.pt:18
 msgid "Active: ${active_filter_title}"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:29
-#: plone.app.hud:/hud_users.pt:49
-msgid "See"
+#: plone.app.hud:/hud_users.pt:37
+msgid "Group"
 msgstr ""
 
 #: plone.app.hud:/hud_users.pt:38
-msgid "Users in ${group_name}"
+msgid "Count"
 msgstr ""
 
-#: plone.app.hud:/hud_users.pt:8
-msgid "Count users"
-msgstr ""
-
-#: plone.app.hud:/hud_users.py:17
-msgid "Last day"
-msgstr ""
-
-#: plone.app.hud:/hud_users.py:18
-msgid "Last week"
+#: plone.app.hud:/hud_users.py:12
+msgid "Users"
 msgstr ""
 
 #: plone.app.hud:/hud_users.py:19
-msgid "Last month"
+msgid "Last day"
 msgstr ""
 
 #: plone.app.hud:/hud_users.py:20
-msgid "Last year"
+msgid "Last week"
 msgstr ""
 
 #: plone.app.hud:/hud_users.py:21
+msgid "Last month"
+msgstr ""
+
+#: plone.app.hud:/hud_users.py:22
+msgid "Last year"
+msgstr ""
+
+#: plone.app.hud:/hud_users.py:23
 msgid "Never"
 msgstr ""
 
