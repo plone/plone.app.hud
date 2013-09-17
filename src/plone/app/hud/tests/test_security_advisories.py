@@ -3,7 +3,6 @@
 
 from plone.app.hud.testing import IntegrationTestCase
 
-import datetime
 import mock
 import os
 import tempfile
@@ -94,42 +93,62 @@ class TestSecurityAdvisories(IntegrationTestCase):
 
     def test_parsed_feed(self):
         self.prepare_security_advisories_env()
-        self.assertEqual(
-            self.security_advisories.feed_data,
-            [{'hash': '455ca55fc73efe03fad82a6180f4002d557c507e',
-              'link': u'http://some.link.xyz/hotfix-update-posted',
-              'localized_time': u'Jul 02, 2013',
-              'marked_as_read': False,
-              'summary': u'Version 1.3 of 20130618 released.',
-              'title': u'20130618 Hotfix update posted',
-              'updated': datetime.datetime(2013, 7, 2, 14, 50, 9)},
-             {'hash': '0b9cbb1288b35a0f750d426f18d80d59d7df9e95',
-              'link': u'http://some.link.xyz/security-patch',
-              'localized_time': u'Jun 11, 2013',
-              'marked_as_read': False,
-              'summary': u'download.zope.org server issues delaying hotfix',
-              'title': u'Security Patch Delayed until 2013-06-18',
-              'updated': datetime.datetime(2013, 6, 11, 15, 23, 24)}]
-        )
+
+        for entry in self.security_advisories.feed_data:
+            if entry['hash'] == '455ca55fc73efe03fad82a6180f4002d557c507e':
+                self.assertEqual(
+                    entry['link'], u'http://some.link.xyz/hotfix-update-posted'
+                )
+                self.assertIsNotNone(entry['localized_time'])
+                self.assertEqual(
+                    entry['marked_as_read'], False,
+                )
+                self.assertEqual(
+                    entry['summary'], u'Version 1.3 of 20130618 released.',
+                )
+                self.assertEqual(
+                    entry['title'], u'20130618 Hotfix update posted',
+                )
+                self.assertIsNotNone(entry['updated'])
+
+            elif entry['hash'] == '0b9cbb1288b35a0f750d426f18d80d59d7df9e95':
+                self.assertEqual(
+                    entry['link'], u'http://some.link.xyz/security-patch'
+                )
+                self.assertIsNotNone(entry['localized_time'])
+                self.assertEqual(
+                    entry['marked_as_read'], False,
+                )
+                self.assertEqual(
+                    entry['summary'],
+                    u'download.zope.org server issues delaying hotfix',
+                )
+                self.assertEqual(
+                    entry['title'],
+                    u'Security Patch Delayed until 2013-06-18',
+                )
+                self.assertIsNotNone(entry['updated'])
+
+            else:
+                self.fail(
+                    "This shouldn't happed, "
+                    "it means that feed entry is changed or added."
+                )
 
     def test_marked_as_read(self):
         self.prepare_security_advisories_env({
             "toggle_mark": "455ca55fc73efe03fad82a6180f4002d557c507e"
         })
-        self.assertEqual(
-            self.security_advisories.feed_data,
-            [{'hash': '455ca55fc73efe03fad82a6180f4002d557c507e',
-              'link': u'http://some.link.xyz/hotfix-update-posted',
-              'localized_time': u'Jul 02, 2013',
-              'marked_as_read': True,
-              'summary': u'Version 1.3 of 20130618 released.',
-              'title': u'20130618 Hotfix update posted',
-              'updated': datetime.datetime(2013, 7, 2, 14, 50, 9)},
-             {'hash': '0b9cbb1288b35a0f750d426f18d80d59d7df9e95',
-              'link': u'http://some.link.xyz/security-patch',
-              'localized_time': u'Jun 11, 2013',
-              'marked_as_read': False,
-              'summary': u'download.zope.org server issues delaying hotfix',
-              'title': u'Security Patch Delayed until 2013-06-18',
-              'updated': datetime.datetime(2013, 6, 11, 15, 23, 24)}]
-        )
+
+        # find the correct entry
+        correct_entry = None
+        for entry in self.security_advisories.feed_data:
+            if entry['hash'] == '455ca55fc73efe03fad82a6180f4002d557c507e':
+                correct_entry = entry
+                break
+
+        # check that correct entry exists
+        self.assertIsNotNone(correct_entry)
+
+        # check if the code marked this entry as read
+        self.assertTrue(correct_entry['marked_as_read'])
