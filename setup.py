@@ -16,7 +16,7 @@ long_description = \
 
 setup(
     name='plone.app.hud',
-    version='0.1',
+    version='1.0a1',
     description="Plone Heads Up Display Panels",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -60,6 +60,7 @@ setup(
             'niteoweb.loginas',
             'plone.app.debugtoolbar',
             'plone.reload',
+            'zest.pocompile',
             'zest.releaser',
             'zptlint',
         ],
