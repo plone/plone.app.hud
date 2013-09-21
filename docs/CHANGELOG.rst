@@ -5,7 +5,8 @@ Changelog
 1.0a2 (unreleased)
 ------------------
 
-- Nothing yet.
+- Added Chinese Simplified translation.
+  [Jian Aijun]
 
 
 1.0a1 (2013-09-17)
